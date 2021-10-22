@@ -14,5 +14,5 @@ Displays Pages content
 	<div class="entry-content">
 		<?php the_content() ?>
 	</div>
-	<p>Template: content-page.php</p>		
+		
 </article>

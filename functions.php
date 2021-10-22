@@ -61,6 +61,17 @@ function woocommerce_support() {// add support
     add_theme_support( 'wc-product-gallery-slider' );
 }
 
+// Update WooCommerce Flexslider options
+
+add_filter( 'woocommerce_single_product_carousel_options', 'ud_update_woo_flexslider_options' );
+
+function ud_update_woo_flexslider_options( $options ) {
+
+    $options['directionNav'] = true;
+
+    return $options;
+}
+
 function gtm(){ //add google tag mannager?>
       <!-- Google Tag Manager -->
       <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -89,15 +100,15 @@ function custom_remove_woo_checkout_fields( $fields ) {//remove fields from chec
    if ( function_exists( 'is_woocommerce' ) ) {
       // remove billing fields
       //unset($fields['billing']['billing_first_name']);
-      unset($fields['billing']['billing_last_name']);
-      unset($fields['billing']['billing_company']);
+      //unset($fields['billing']['billing_last_name']);
+      //unset($fields['billing']['billing_company']);
       //unset($fields['billing']['billing_address_1']);
       //unset($fields['billing']['billing_address_2']);
       //unset($fields['billing']['billing_city']);
       //unset($fields['billing']['billing_postcode']);
       //unset($fields['billing']['billing_country']);
       //unset($fields['billing']['billing_state']);
-      unset($fields['billing']['billing_phone']);
+      //unset($fields['billing']['billing_phone']);
       //unset($fields['billing']['billing_email']);
       
       
@@ -164,6 +175,45 @@ function test2(){
 
 }
 
+
+
+add_action('woocommerce_shop_loop_item_title','test3', 5);
+
+function test3(){
+
+    global $post, $product;
+
+    $cats = wc_get_product_category_list($product->get_id());
+
+    global $product;
+
+    $product_cats_ids = wc_get_product_term_ids( $product->get_id(), 'product_cat' );
+
+    foreach( $product_cats_ids as $cat_id ) {
+        $term = get_term_by( 'id', $cat_id, 'product_cat' );
+
+        //echo $term->name;
+    }
+
+    echo "<div class='title-price-container flex-normal'>";
+
+}
+
+
+add_action('woocommerce_after_shop_loop_item_title','test4', 15);
+
+function test4(){
+
+    echo "</div>";
+
+}
+
+remove_action('woocommerce_before_shop_loop_item_title', 'woocommerce_show_product_loop_sale_flash');
+
+
+
+
+    
 
 /*
 *
@@ -666,6 +716,65 @@ function filter_wc_loop_add_to_cart_args( $args, $product ) {
     return $args;
 }
 
+/**
+ * Change number of related products output
+ */ 
 
+add_filter( 'woocommerce_output_related_products_args', 'jk_related_products_args', 20 );
+  function jk_related_products_args( $args ) {
+    $args['posts_per_page'] = 3; // 4 related products
+    $args['columns'] = 3; // arranged in 2 columns
+    return $args;
+}
+
+
+/**
+ * Remove product page tabs
+ */
+//add_filter( 'woocommerce_product_tabs', 'my_remove_all_product_tabs', 98 );
+ 
+function my_remove_all_product_tabs( $tabs ) {
+  unset( $tabs['description'] );        // Remove the description tab
+  unset( $tabs['reviews'] );       // Remove the reviews tab
+  unset( $tabs['additional_information'] );    // Remove the additional information tab
+  return $tabs;
+}
+
+add_filter('gettext', 'change_rp_text', 10, 3);
+add_filter('ngettext', 'change_rp_text', 10, 3);
+
+function change_rp_text($translated, $text, $domain)
+{
+     if ($text === 'Related products' && $domain === 'woocommerce') {
+         $translated = esc_html__('También te puede interesar', $domain);
+     }
+     return $translated;
+}
+
+add_action('woocommerce_after_single_product','gg');
+//do_action('woocommerce_after_single_product_summary','gg');
+
+
+function gg(){
+   // echo "pinguino";
+}
+
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
+
+add_action('hook_secreto', 'woocommerce_output_product_data_tabs', 10);
+
+/**
+ * Rename product data tabs
+ */
+add_filter( 'woocommerce_product_tabs', 'woo_rename_tabs', 98 );
+function woo_rename_tabs( $tabs ) {
+
+    $tabs['description']['title'] = __( 'Beneficios' );       // Rename the description tab
+    $tabs['reviews']['title'] = __( 'Modo de uso' );                // Rename the reviews tab
+    $tabs['additional_information']['title'] = __( 'Ingredientes' );    // Rename the additional information tab
+
+    return $tabs;
+
+}
 
 ?>

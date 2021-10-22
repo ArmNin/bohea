@@ -6,7 +6,28 @@ page-{id}
 page-{slug}
 */
 ?>
-<?php get_header('landing'); ?>
+<?php 
+	
+	if(is_cart() || is_checkout()){
+
+
+		get_header('landing'); 
+
+	?>
+
+		<div class="bg-cartcheck"></div>
+
+	<?php
+
+	
+
+	} else{
+
+		get_header();
+
+	}
+
+?>
 	<div id="primary" class="content-area">
 		
 		<main id="main" class="site-main" role="main">
@@ -16,7 +37,7 @@ page-{slug}
 
 			<?php endwhile;  endif; ?>
 
-			<p>Template: page.php</p>			
+					
 		
 		</main>
 	</div>	

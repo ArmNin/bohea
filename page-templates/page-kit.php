@@ -18,7 +18,7 @@
             
                <h1>Arma tu kit</h1> 
 
-               <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/kit.jpg" alt="">
+               <img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/DSC0720.jpg" alt="">
 
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Assumenda optio itaque facere laudantium officia illo eos deleniti!</p>
 

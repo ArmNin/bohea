@@ -29,7 +29,7 @@
                 
                 <div class="slider">
 
-                    <h1 class="special"><span>SHOP</span>Aceites escenciales</h1>
+                    <h1 class="special"><span class="title">SHOP</span>Aceites escenciales</h1>
 
                 </div>
 
@@ -39,9 +39,15 @@
 
             <div class="item right">
                 
+                <!--
                 <h6>Arma tu kit</h6>
 
                 <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+                -->
+
+                <div class="plant plant--up-rotate">
+                    <div class="img"></div>
+                </div>
 
                 <div class="btn-info flex-normal">
                     
@@ -51,9 +57,7 @@
 
                 </div>
 
-                <div class="plant plant--up-rotate">
-                    <div class="img"></div>
-                </div>
+                
 
             </div>
 
