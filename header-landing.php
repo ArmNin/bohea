@@ -226,7 +226,7 @@
 
 				<div class="right flex-normal">	
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/conocenos">Conocenos</a></div>	
-					<div class="menu-item"><a href="<?php echo get_site_url() ?>">Blog</a></div>
+					<div class="menu-item"><a href="<?php echo get_site_url() ?>/blog">Blog</a></div>
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/contacto">Contacto</a></div>
 					<div class="menu-item cart">
 						
