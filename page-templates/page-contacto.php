@@ -27,7 +27,7 @@
 
     <div class="links flex-normal">
         
-        <a href="">
+        <a href="https://www.instagram.com/boheaoils/">
             
             <div class="contact-img">
                 
@@ -71,7 +71,7 @@
 
         </a>
 
-        <a href="">
+        <a href="https://www.facebook.com/boheaoilsmx">
             
             <div class="contact-img">
                 
@@ -91,7 +91,46 @@
 
         </a>
 
-        <a href="">
+        <?php  
+
+            // Fix Api Whatsapp on Desktops
+            // Dev: Jean Livino
+            // insert the text and message
+            // '5212223410458'   
+            //$phone1 = get_field('w1', 'option');
+            $phone1 = '+5212223585909';
+            //$phone2 = get_field('w2', 'option');
+            //$message = get_field('t1', 'option');
+            $message = "";
+            $map_url = 'https://goo.gl/maps/NYbvshVEekWBTczb7';
+            //$face = get_field('face', 'option');
+            //$insta = get_field('insta', 'option');
+            // DO NOT EDIT BELOW
+            $message = urlencode($message);
+            $message = str_replace('+','%20',$message);
+            $iphone = strpos($_SERVER['HTTP_USER_AGENT'],"iPhone");
+            $android = strpos($_SERVER['HTTP_USER_AGENT'],"Android");
+            $palmpre = strpos($_SERVER['HTTP_USER_AGENT'],"webOS");
+            $berry = strpos($_SERVER['HTTP_USER_AGENT'],"BlackBerry");
+            $ipod = strpos($_SERVER['HTTP_USER_AGENT'],"iPod");
+            $url = "";
+            // check if is a mobile
+            if ($iphone || $android || $palmpre || $ipod || $berry == true)
+            {
+              $urlp1 = "https://api.whatsapp.com/send?phone=".$phone1."&text=".$message;;
+              //$urlp2 = "https://api.whatsapp.com/send?phone=".$phone2;
+              //."&text=".$message;
+            }
+            // all others
+            else {
+               $urlp1 = "https://web.whatsapp.com/send?phone=".$phone1."&text=".$message;;
+               //$urlp2 = "https://web.whatsapp.com/send?phone=".$phone2;
+               //."&text=".$message;
+            }
+
+        ?>
+
+        <a href="<?php echo $urlp1; ?>">
             
             <div class="contact-img">
                 
@@ -160,7 +199,7 @@
 
         <div class="mobile-indicator" id="mobile-indicator-proceso2"></div>
 
-        <div class="flexslider slide-js" id="contact-slider">
+        <div class="flexslider" id="contact-slider">
 
             <div class="overlay"></div>
 
@@ -174,7 +213,7 @@
                         
                         <div class="content-main wc flex-normal" >
 
-                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/logoAhorro.png) no-repeat center; background-size: 50%;">
+                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/san.png) no-repeat center; background-size: 50%;">
 
                             </div>
 
@@ -206,7 +245,7 @@
                         
                         <div class="content-main flex-normal" >
 
-                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/logomedina.png) no-repeat center; background-size: 80%;">
+                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/sears.png) no-repeat center; background-size: 80%;">
 
                             </div>
 

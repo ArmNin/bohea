@@ -277,7 +277,11 @@
 
 									</div>
 
-									<div class="txt">Facebook</div>	
+									
+
+										<div class="txt"><a href="https://www.facebook.com/boheaoilsmx">Facebook</a></div>	
+
+									
 
 								</div>
 
@@ -321,7 +325,7 @@
 										
 									</div>
 
-									<div class="txt">Instagram</div>	
+									<div class="txt"><a href="https://www.instagram.com/boheaoils/">Instagram</a></div>	
 
 								</div>
 

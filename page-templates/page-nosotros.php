@@ -10,7 +10,7 @@
 
 <header>
     
-    <video src="<?php echo get_stylesheet_directory_uri() ?>/assets/video/nos.mp4" autoplay muted loop></video>
+    <video class="vidd2" src="<?php echo get_stylesheet_directory_uri() ?>/assets/video/nos.mp4" autoplay muted loop></video>
 
 </header>
 

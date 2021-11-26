@@ -6,7 +6,7 @@
  */
 ?>
 
-<?php get_header() ?>
+<?php get_header('') ?>
 
     <header class="store">
         <div class="bg">
@@ -29,7 +29,7 @@
                 
                 <div class="slider">
 
-                    <h1 class="special"><span class="title">SHOP</span>Aceites escenciales</h1>
+                    <h1 class="special"><span class="title">SHOP</span></h1>
 
                 </div>
 
@@ -74,7 +74,7 @@
 
             <div class="close-filter-box close-icon">&times;</div>
 
-            <h4>Filtra los productos</h4>
+            <h4>Filtro</h4>
 
             <div class="close-filters flex-normal">
 
@@ -85,14 +85,17 @@
            </div>
             
             <div class="box">
-                <?php echo do_shortcode('[woocommerce_product_filter placeholder="¿Que producto estás buscando?"]') ?>
+                <?php echo do_shortcode('[woocommerce_product_filter  placeholder="¿Que producto estás buscando?"]') ?>
            </div>
            <div class="box">
-            <?php echo do_shortcode('[woocommerce_product_filter_category]') ?>
+            <?php echo do_shortcode('[woocommerce_product_filter_category heading="Filtro de productos" exclude="15, 53"]'); //44 kits ?>
            </div>
+          
+           <!--
            <div class="box">
-            <?php echo do_shortcode('[woocommerce_product_filter_price]') ?>
+            <?php //echo do_shortcode('[woocommerce_product_filter_price]') ?>
            </div>
+            -->
            <div class="box">
             <?php echo do_shortcode('[woocommerce_product_filter_attribute]') ?>
            </div>
@@ -134,8 +137,18 @@
                 </div>
 
            </div>
+
+           <!--<div class="products">-->
             
-           <?php echo do_shortcode('[woocommerce_product_filter_products]') ?>
+            <?php echo do_shortcode('[woocommerce_product_filter_products]') ?>
+
+           <!--</div>-->
+
+           <div id="pagination-extra" class="flex-normal">
+               
+
+
+           </div>
 
         </div>
 

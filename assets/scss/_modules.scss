@@ -55,6 +55,8 @@ Modules styles
 	background-color: #fff;
 	z-index: 1000;
 	transition: all 0.3s ease;
+	flex-direction: row;
+	justify-content: space-between;
 
 	&.headroom--unpinned{
 		transform: translateY(-100%);
@@ -66,11 +68,7 @@ Modules styles
 		box-shadow: 3px 3px 6px rgba(0,0,0,0);
 	}
 
-	>.logo{
-		@include tablet{
-			display: none;
-		}
-	}
+	
 	&.l-nav{
 		.menu{
 			.left,
@@ -83,11 +81,32 @@ Modules styles
 
 		width: 100%;
 		padding: 22px 20px;
+		position: absolute;
+		width: 100%;
+		background-color: #f4f4f4;
+		bottom: 0;
+		left: 0;
+		transform: translate(0, 100%);
+		display: none;
+		&.open{
+			display: flex;
+		}
+		@include tablet{
+			display: flex;
+			position: relative;
+			left: auto;
+			bottom: auto;
+			transform: translate(0,0);
+		}
 
 		.middle{
 
 			width: 200px;
 			height: auto;
+			display: none;
+			@include tablet{
+				display: block;
+			}
 			.logo{
 				width: 100%;
 				max-width: 165px;
@@ -115,13 +134,138 @@ Modules styles
 
 	}
 
+	.mobile-menu{
+		width: 100%;
+		flex-direction: row;
+		justify-content: space-between;
+		padding: 0 5% 10px 15px;
+		@include tablet{
+			display: none;
+		}
+		>.logo{
+			width: 100px;
+			height: auto;
+			//margin-left: 5%;
+			@include tablet{
+				display: none;
+			}
+		}
+		.item{
+			width: 25px;
+			height: 25px;
+			position: relative;
+			font-size: 0.8em;
+
+			svg{
+				width: 100%;
+				height: auto;
+			}
+			.number{
+				position: absolute;
+				top: 50%; 
+				right: 0;
+				transform: translate(110%, -50%);
+				padding: 5px 10px;
+				color: white;
+				width: 100%;
+				height: 100%;
+				
+				&:after{
+					position: absolute;
+					content: "";
+					width: 100%;
+					height: 100%;
+					background-color: $cta-color;
+					left: 0;
+					top:0;
+					border-radius: 50%;
+					z-index: -1;
+				}
+			}
+		}
+		.cart{
+			border-bottom: transparent 1.5px solid;
+			margin-right: 25px;
+			margin-left: 10px;
+			//display: none;
+			@include tablet{
+				//display: block;
+			}
+			.icon{
+				transition: all 0.3s ease;
+			}
+			&:hover{
+				cursor: pointer;
+				.icon{
+					transform: scale(0.8);
+				}
+				.number{
+					&:after{
+						background-color: black;
+					}
+				}
+			}
+		}
+		.r{
+			flex-direction: row;
+			flex: 1;
+			justify-content: flex-end;
+		}
+	}
+
 }
+
+.has-svg{
+	width: 20px;
+	height: 20px;
+	svg{
+		width: 100%;
+		height: auto;
+	}
+}
+
+.menu-trigger{
+	@include tablet{
+		display: none;
+	}
+
+	.icon{
+		&:nth-of-type(2){
+			display: none;
+			width: 15px;
+			margin-top: 4px;
+			.has-svg{
+				width: 100%;
+				svg{
+					width: 100%;
+					height:auto;
+				}
+			}
+		}	
+	}
+
+	&.open{
+		.icon{
+			&:nth-of-type(1){
+				display: none;
+			}	
+			&:nth-of-type(2){
+				display: block;
+			}	
+		}	
+	}
+}
+
 
 body{
 	 font-family: "Athelas";
 	 overflow-x: hidden;
-	 padding-top: 147px;
+	 padding-top: 101.3px;
+	 @include tablet{
+	 	padding-top: 139px;
+	 }
 	 &.lb-disable-scrolling {
+	 	padding-top: 147px;
 	   overflow: hidden!important;
 	 }
 }
@@ -129,12 +273,18 @@ body{
 .promo-bar{
 	width: 100%;
 	text-align: center;
-	padding: 10px 0;
+	
 	font-size: 1.2rem;
 	background-color: #84a2c6;
 	color: white;
 	//font-weight: bold;
 	letter-spacing: 1.2px;
+	padding: 5px 4%;
+	margin-bottom: 13px;
+	@include tablet{
+		padding: 10px 0;
+		margin-bottom: 0;
+	}
 	span{
 		font-weight: bold;
 	}
@@ -144,6 +294,24 @@ body{
 			width: 25px;
 			fill: white!important;
 			stroke-color: white!important;
+		}
+	}
+	.flexslider{
+		background-color: transparent;
+		border: none;
+		text-align: center;
+		margin-bottom: 0;
+		.content-main{
+			flex-direction: row;
+			p{
+				width: 80%;
+				font-size: 0.70em;
+				text-align: left;
+				@include tablet{
+					width: auto;
+					font-size: 1em;	
+				}
+			}
 		}
 	}
 }
@@ -159,10 +327,12 @@ body{
 		 border-bottom: solid 1.5px black;
 		 position: relative;
 		 &:hover{
-		 	.more{
-		 		opacity: 1;
-		 		pointer-events: auto;
-		 		transform: translate(0, 100%);
+		 	@include tablet{
+			 	.more{
+			 		opacity: 1;
+			 		pointer-events: auto;
+			 		transform: translate(0, 100%);
+			 	}
 		 	}
 		 }
 		 a{
@@ -174,6 +344,10 @@ body{
 		 }
 		 &.cart{
 		 	border-bottom: transparent 1.5px solid;
+		 	display: none;
+		 	@include tablet{
+		 		display: block;
+		 	}
 		 	.icon{
 		 		transition: all 0.3s ease;
 		 	}
@@ -292,9 +466,14 @@ header{
 	height: auto;
 	position: relative;
 	&.contacto{
-		height: 60vh;
-		background: transparent url('assets/images/piernas.jpg') no-repeat center left;
+		height: 150px;
+		background: transparent url('assets/images/piernas.jpg') no-repeat center;
 		background-size: cover;
+		@include tablet{
+			height: 60vh;
+			background: transparent url('assets/images/piernas.jpg') no-repeat center left;
+			background-size: cover;
+		}
 	}
 	//padding-top: 50px;
 	.overlay{
@@ -327,8 +506,10 @@ header{
 	}
 
 	&.store{
-		padding: 55px 0 55px 0;
-
+		padding: 20px 0 20px 0;
+		@include tablet{
+			padding: 55px 0 55px 0;
+		}
 		
 
 
@@ -357,14 +538,52 @@ header{
 		.info-slide{
 			position: absolute;
 			left: 5%;
-			top: 50%;
-			transform: translate(0,-50%);
+			bottom: 2%;
+			transform: translate(0,0);
+			width: 90%;
+			padding: 10px;
+			background-color: rgba(0,0,0,0.3);
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+			align-items: center;
+			border-radius: 4px;
+			@include tablet{
+				padding: 5%;
+				display: block;
+				width: auto;
+				bottom: auto;
+				left: 5%;
+				top: 50%;
+				transform: translate(0,-50%);
+				background-color: transparent;
+			}
 			h1{
 				text-transform: none;
-				margin-bottom: 20px;
+				margin-bottom: 00px;
+				text-align: center;
+				color: white;
+				font-size: 0.85em;
+				margin-right: 20px;
+				text-shadow: 1px 1px 1px black;
+				@include tablet{
+					text-align: left;
+					color: black;
+					margin-bottom: 20px;
+					font-size: 1.8em;
+					width: 100%;
+				}
 			}
 			.btn-info{
+				flex: 1;
 				//justify-content: flex-start;
+				a{
+					display: block;
+					width: 100%;
+					div{
+						width: 100%;
+					}
+				}
 			}
 			//width: 100%;
 		}
@@ -453,12 +672,22 @@ header{
 			}
 			&.left,
 			&.right{
-				width: 25%;
-				margin: 0;
+				width: 90%;
+				margin: auto;
+				
+				@include tablet{
+					width: 25%;
+					margin: 0;
+				}
 			}
 			&.middle{
-				width: 25%;
-				margin: 0 2.5%;
+				width: 95%;
+				margin: 0 2.5% 20px 2.5%;
+				text-align: center;
+				@include tablet{
+					width: 25%;
+					margin: 0 2.5%;
+				}
 			}
 		}
 		
@@ -477,28 +706,57 @@ header{
 
 		}
 		.middle{
+
 			h1{
 				text-align: center;
-				font-size: 1.65em;
+				font-size: 1em;
 				width: 150px;
 				//margin: 20px auto;
 				position: relative;
 				text-transform: none;
+				@include tablet{
+					font-size: 1.65em;
+				}
 				span{
 					display: block;
-					font-size: 1.1rem;
+					font-size: 0.7rem;
 					line-height: 0em;
 					text-transform: none;
+					max-width: 150px;
+					@include tablet{
+						font-size: 1.1rem;
+					}
+					&.title{
+						margin-bottom: 0;
+					}
 				}
 				&.special{
-					font-size: 2em;
-					text-align: left;
+					font-size: 1.3em;
+					
 					width: 100%;
-					max-width: 250px;
+					
 					text-transform: none;
+					@include tablet{
+						text-align: left;
+						max-width: 100%;
+						font-size: 2em;
+					}
 				}
 			}
 
+			p{
+				text-align: center!important;
+				@include tablet{
+					text-align: left!important;
+				}
+			}
+
+			.m-btn--secondary{
+				font-size: 0.6em;
+				@include tablet{
+					font-size: 0.75em;
+				}
+			}
 			
 		}
 		.right{
@@ -510,11 +768,17 @@ header{
 			.btn-info{
 				flex-direction: column-reverse;
 				.img{
-					width: 350px;
-					height: 220px;
+					width: 95%;
+					height: 140px;
+					margin: auto;
 
 					background: transparent resolve('assets/images/bg-kit.png') no-repeat center left;
 					background-size: cover;
+
+					@include tablet{
+						width: 350px;
+						height: 220px;
+					}
 					&.special{
 						background: transparent resolve('assets/images/DSC0720.jpg') no-repeat center left;
 						background-size: cover;
@@ -543,9 +807,10 @@ header{
 	transition: all 0.3s ease;
 	transform: translateY(0);
 	border-radius: 6px;
-	font-size: 0.8rem;
+	font-size: 0.6rem;
 	@include tablet{
 		font-size: 1em;
+		font-size: 0.8rem;
 	}
 	&:hover{
 		background-color: darken(#f4f4f4, 13%);
@@ -652,10 +917,13 @@ header{
 	}
 	&.shop{
 
-		padding: 50px 0;
+		padding: 20px 0;
 		background-color: #ffffff;
 		margin-top: 0;
 		margin-bottom: 0;
+		@include tablet{
+			padding: 50px 0;
+		}
 
 		.woocommerce nav.woocommerce-pagination ul li{
 			//margin-right: 5px;
@@ -675,6 +943,21 @@ header{
 			background-color: $cta-color;
 		}
 
+	}
+
+	.woocommerce-ordering{
+		&:after{
+			content: "";
+			  clear: both;
+			  display: table;
+		}
+	}
+
+	.woocommerce-pagination{
+		width: 100%;
+		@include tablet{
+			width: auto;
+		}
 	}
 
 	h3{
@@ -701,6 +984,7 @@ header{
 			@include tablet{
 				position: relative;
 				width: 300px;
+				z-index: 1;
 				//text-align: right;
 				margin-right: 50px;
 				padding-top: 30px;
@@ -778,6 +1062,7 @@ header{
 					padding-top: 10px;
 					position: relative;
 					padding-left: 10px;
+					
 					&:after{
 						position: absolute;
 						left: 0;
@@ -834,12 +1119,18 @@ header{
 				    font-size: 95%;
 				    font-weight: 600;
 				    margin-bottom: 10px;
+				    text-transform: uppercase!important;
+				    font-size: 1rem;
 				}
 
 				ul.product-categories{
 
 					li{
 						padding-left: 15px;
+						text-transform: uppercase!important;
+						font-weight: bold;
+
+						//display: flex;
 						&.nav-back{
 							margin-bottom: 15px;
 							padding: 10px;
@@ -853,10 +1144,20 @@ header{
 								background-color: darken(#f4f4f4, 7%);
 							}
 						}
-
+						&.cat-parent{
+							font-weight: bold;
+							.children{
+								li{
+									font-weight: normal;
+									text-transform: none!important;
+								}
+							}
+						}
 						a{
 							text-decoration: none;
 							color: black;
+							color: #444!important;
+							font-size: 0.9rem;
 							&:hover{
 								color: $main-color;
 							}
@@ -925,12 +1226,13 @@ ul{
 			}
 		}
 		>li{
-			background-color: transparent;//lighten($bg-color, 5%);
+			
 			padding-bottom: 10px!important;
 			//border-radius: 6px;
 			//overflow: hidden;
 			border: none;
-			border-right: solid 1px black;//lighten(#ccc, 10%)!important;
+			background-color: #ffffff;
+			
 
 			margin: 0 0 10px 0!important;
 			
@@ -938,6 +1240,8 @@ ul{
 				padding-bottom: 20px!important;
 				margin: 0 0 2.992em 0%!important;
 				width: 25%;
+				border-right: solid 1px black;//lighten(#ccc, 10%)!important
+				background-color: transparent;//lighten($bg-color, 5%);;
 			}
 			&.product-type-simple{
 				&:hover{
@@ -1077,6 +1381,7 @@ ul{
 				img{
 					position: relative;
 					z-index: 3;
+
 				}
 				&-1{
 					/*
@@ -1093,17 +1398,25 @@ ul{
 					transform: translate(0, 50%);
 					*/
 					position: absolute;
-					width: 80%;
-					height: 80%;
+					width: 100px;
+					height: 100px;
 					background-color: red;
 					left: 50%;
 					top: 50%;
-					transform: translate(-50%, -50%) scale(0.8);
-					opacity: 0;
+					transform: translate(-50%, -50%) scale(1);
+					opacity: 1;
 					border-radius: 50%;
 					transition: all 0.3s ease;
 					background: transparent resolve('assets/images/bg/xBergamota.png') no-repeat center bottom;
 					background-size: 140% auto;
+					display: none;
+					@include tablet{
+						transform: translate(-50%, -50%) scale(0.8);
+						opacity: 0;
+						width: 80%;
+						height: 80%;
+						display: block;
+					}
 				}
 				&-2{
 					width: 280px;
@@ -1126,8 +1439,16 @@ ul{
 				align-items: center;
 				align-content: center;
 				h2{
-					width: 50%;
-					text-align: left;
+					
+					width: 100%;
+					text-transform: lowercase;
+					&:first-letter{
+						text-transform: uppercase;
+					}
+					@include tablet{
+						width: 50%;
+						text-align: left;	
+					}
 				}
 				span{
 					.price{
@@ -1207,6 +1528,11 @@ ul{
 			}
 			.img{
 				border-radius: 6px;
+			}
+			a{
+				&.wc-forward{
+					display: none!important;
+				}
 			}
 		}
 	}
@@ -1313,12 +1639,20 @@ ul{
 	}
 
 	.flex-direction-nav .flex-next{
-		right: -33px;
+		display: none;
+		@include tablet{
+			right: -33px;
+			display: block;
+		}
 		
 	}
 
 	.flex-direction-nav .flex-prev{
-		left: -45px;
+		display: none;
+		@include tablet{
+			display: block;
+			left: -45px;
+		}
 	}
 
 }
@@ -1951,7 +2285,10 @@ ul{
 }
 
 .product{
-	margin-top: 30px;
+	margin-top: 0px;
+	@include tablet{
+		margin-top: 30px;
+	}
 	.flex-viewport{
 		overflow: hidden;
 		border-radius: 4px;
@@ -2044,7 +2381,12 @@ ul{
 		width: 50%;
 		padding: 8px 0;
 		background-color: white;
+		flex-direction: row;
 	}
+}
+
+#filter-container{
+	background-color: #fff;
 }
 
 .woocommerce span.onsale{
@@ -2066,11 +2408,18 @@ ul{
 }
 
 .single-product{
+	.product{
+		margin-top: 0px;
+		@include tablet{
+			margin-top: 60px;
+		}
+	}
 	.wrapp-product{
 		width: 95%;
-		margin: 15px auto 0 auto;
+		margin: 0 auto;
 		@include tablet{
 			width: 100%;
+			margin: 15px auto 0 auto;
 		}
 		//.flexslider{
 			.flex-control-nav{
@@ -2207,11 +2556,17 @@ ul{
 	position: fixed;
 	
 	z-index: 1000000000;
+	width: 70%;
+	max-width: 250px;
 
 	top: 0;
 	right: 0;
 
 	height: 100vh;
+	@include tablet{
+		width: auto;
+		max-width: none;
+	}
 	
 	display: none;
 	&.show{
@@ -2244,21 +2599,35 @@ ul{
 		left: 0px;
 		top: 10px;
 		padding: 0 10px;
-		transform: translate(-90%, 0);
+	
 		font-weight: bold;
 		font-size: 1.7em;
-		color: white;
-		background-color: $main-color;
+		color: black;
+		background-color: white;
 		transition: all 0.3s ease;
 		cursor: pointer;
+		transform: translate(-100%, 0);
+		@include tablet{
+			left: 0px;
+			transform: translate(-90%, 0);
+			color: white;
+			background-color: $main-color;
+		}
 		&:hover{
 			color: black
 		}
 	}
-
+	.woocommerce-mini-cart__empty-message{
+		padding-top: 80px;
+		font-weight: bold;
+		text-align: center;
+	}
 	.widget_shopping_cart_content{
-		width: 400px;
+		width: 100%;
 		height: 100%;
+		@include tablet{
+			width: 400px;
+		}
 
 		.container-mini-cart-pos{
 
@@ -2270,33 +2639,6 @@ ul{
 				width: 100%;
 
 			}
-			.woocommerce-mini-cart-item{
-
-				.pinguino{
-
-					position: relative;
-
-					&:after{
-						position: absolute;
-						content: "En tu kit";
-						top: 0%;
-						right: 0%;
-						transform: translate(0%, 0%);
-						z-index: 10;
-						background-color: black;
-						color: white;
-						padding: 5px;
-						text-transform: uppercase;
-						text-align: center;
-						line-height: 1.3em;
-						font-size: 0.8em;
-						width: 80px;
-						box-shadow: 4px 4px 8px rgba(0,0,0,0.3);
-					}
-
-				}
-
-			}
 			.info-mini-cart-top{
 				flex: 1;
 				overflow-y: scroll;
@@ -2304,7 +2646,7 @@ ul{
 				h5{
 					text-align: center;
 					padding: 15px 0;
-					font-size: .95rem;
+					font-size: 0.75rem;
 					margin-bottom: 10px;
 					background-color: $cta-color;
 					color: white;
@@ -2314,7 +2656,7 @@ ul{
 				.woocommerce-mini-cart-item{
 					width: 95%;
 					margin: auto;
-					padding:  0 10px;
+					padding:  0 10px 10px 10px;
 					margin-bottom: 10px;
 					border-bottom:solid 1px #ccc;
 					&:nth-child(odd){
@@ -2328,7 +2670,7 @@ ul{
 
 						padding-left: 5%;
 						line-height: 1.3em;
-						font-size: 1em;
+						font-size: 0.80em;
 						font-weight: bold;
 						position: relative;
 
@@ -2351,6 +2693,13 @@ ul{
 					}
 
 					.product-details{
+						flex-direction: row;
+
+						.variation{
+							order: 4;
+							border-left: none;
+							margin-top: 10px;
+						}
 
 						.remove{
 							text-decoration: none;
@@ -2393,6 +2742,19 @@ ul{
 									transform: scale(0.95);
 									opacity: 0.8;
 								}
+							}
+						}
+
+						img{
+							width: 120px;
+							height: 120px;
+							transform: scale(1);
+							opacity: 1;
+							transition: all 0.3s ease;
+							//border: solid 1px red;
+							&:hover{
+								transform: scale(0.95);
+								opacity: 0.8;
 							}
 						}
 
@@ -2454,9 +2816,21 @@ ul{
 				align-self: flex-end;
 				background-color: black;
 				background-color: #f4f4f4;
-				padding: 13px 0;
+				padding: 0 0 13px 0;
 				border-top: solid 1.5px #ccc;
 				position: relative;
+
+				.free-shipping-notice{
+
+					width: 100%;
+					padding-right: 30%;
+					font-size: 0.85rem;
+					padding-top: 5px;
+					span{
+						font-weight: bold;
+					}
+
+				}
 
 				.messages-mini-cart{
 
@@ -2465,12 +2839,16 @@ ul{
 					top: 0;
 					width: 100%;
 					padding: 10px 20px;
-					font-size: 1.15em;
+					font-size: 0.9em;
 					transform: translate(-15px,0);
 					transition: all 0.3s ease;
 					z-index: -1;
 					background-color: $main-color;
 					color: white;
+					display: none;
+					@include tablet{
+						display: block;
+					}
 					&:hover{
 						transform: translate(-100%,0);
 					}
@@ -2493,6 +2871,10 @@ ul{
 					border-width: 12.5px 0 12.5px 13px;
 					border-color: transparent transparent transparent $main-color;
 					transform: translate(0px, 0px);
+					display: none;
+					@include tablet{
+						display: block;
+					}
 
 				}
 
@@ -2515,13 +2897,16 @@ ul{
 						width: 100%;
 					}
 					.total-wrap{
-
+						flex-direction: row;
 						width: 90%;
-						font-size: 1.15em;
+						font-size: 0.85em;
 						margin: auto;
 						justify-content: space-between;
 						border-top: solid 1px #ccc;
 						padding: 15px 0;
+						@include tablet{
+							font-size: 1em;
+						}
 
 					}
 
@@ -2562,6 +2947,11 @@ ul{
 				.buttons{
 					padding: 0 3%;
 					justify-content: space-between;
+					flex-direction: row;
+					margin-bottom: 0;
+					@include tablet{
+						flex-direction: row;
+					}
 					a{
 						padding: 7px 0;
 						width: 49%;
@@ -2571,10 +2961,13 @@ ul{
 						
 						text-align: center;
 						text-transform: uppercase;
-						font-size: 0.65rem;
+						font-size: 0.50rem;
 						font-weight: bold;
 						letter-spacing: 1px;
 						transition: all 0.3s ease;
+						@include tablet{
+							font-size: 0.65rem;
+						}
 						&:nth-child(2){
 							background-color: $cta-color;
 							color: white;
@@ -2594,6 +2987,8 @@ ul{
 	}
 
 }
+
+
 
 .smcw-hiden-wrap{
 	display: none;
@@ -2705,7 +3100,10 @@ section{
 		background-color: #F4f4f4;
 
 		.intro-info{
-			padding-top: 100px;
+			padding-top: 50px;
+			@include tablet{
+				padding-top: 100px;
+			}
 			h3{
 				width: 100%;
 				text-align: center;
@@ -3290,13 +3688,18 @@ section{
 		width: 95%;
 		max-width: 800px;
 		margin: auto;
-		padding: 150px 0;
+		padding: 50px 0;
 		text-align: center;
-		 
+		@include tablet{
+			padding: 150px 0;
+		} 
 
 		 p{
-		 	font-size: 1.4em;
+		 	font-size: 1em;
 		 	line-height: 1.6em;
+		 	@include tablet{
+		 		font-size: 1.4em;
+		 	}
 		 }
 
 	}
@@ -3314,12 +3717,21 @@ section{
 		
 		margin-bottom: 20px;
 		border-bottom: solid 3px $cta-color;
-		font-size: 2em;
+		font-size: 1.2em;
+		@include tablet{
+			font-size: 2em;
+		}
 	
 }
 
 .video-main{
 	//position: relative;
+	
+}
+
+.vid, .vidd2{
+	width: 100%;
+	height: auto;
 }
 
   .custom-cursor{
@@ -3377,9 +3789,17 @@ section{
   .join-us{
 
   	padding: 100px 0;
+  	text-align: center;
 
   	p{
   		font-size: 1.2em;
+  	}
+
+  	.right{
+  		margin-top: 30px;
+  		@include tablet{
+  			margin-top: 0;
+  		}
   	}
 
   	form{
@@ -3388,20 +3808,28 @@ section{
   		display: flex;
   		margin: auto;
   		border-radius: 6px;
-  		border: solid 3px $cta-color;
+  		border: solid 3px $main-color;
+  		overflow: hidden;
   		input[type=text]{
   			flex: 1;
   			padding: 13px;
   			border: none;
   			font-size: 1.1em;
+  			font-size: 0.8em;
+  			@include tablet{
+  				font-size: 1.1em;
+  			}
   		}
   		input[type=submit]{
   			width: 150px;
   			border: none;
-  			background-color: $cta-color;
+  			background-color: $main-color;
   			color: white;
-  			font-weight: bold;
-  			font-size: 1.1em;
+  			//font-weight: bold;
+  			font-size: 0.8em;
+  			@include tablet{
+  				font-size: 1.1em;
+  			}
   			&:hover{
   				background-color: darken($cta-color, 15%);
   				cursor: pointer;
@@ -3418,22 +3846,40 @@ section{
   	background-size: cover;
   	position: relative;
   	overflow: hidden;
+  	text-align: center;
+  	padding-bottom: 50px;
+  	@include tablet{
+  		text-align: left;
+  		padding-bottom: 0;
+  	}
 
   	.columns{
   		align-items: flex-start;
   		align-content: flex-start;
   		padding: 100px 0;
+  		.item{
+  			margin-top: 30px;
+  			h6{
+  				text-align: center;
+  			}
+  		}
   	}
 
   	.logo{
-  		max-width: 250px;
+  		max-width: 150px;
   		margin: auto;
   		align-self: center;
+  		@include tablet{
+  			max-width: 250px;
+  		}
   	}
 
   	h6{
 		text-align: left!important;
 		padding: 0 0px 10px 0px!important;
+		@include tablet{
+			text-align: left!important;
+		}
 	}
 
   	.footer-items{
@@ -3443,7 +3889,8 @@ section{
   			width: 100%!important;
   			margin-bottom: 25px!important;
   			position: relative;
-
+  			flex-direction: row;
+  			justify-content: center;
   			
   			.icon{
   				width: 20px;
@@ -3452,10 +3899,16 @@ section{
   				margin-right: 10px;
   			}
   			.txt{
-  				flex: 1;
+  				
   				word-break: break-all;
   				font-size: 1.3em;
-
+  				@include tablet{
+  					flex: 1;
+  				}
+  			}
+  			a{
+  				text-decoration: none;
+  				color: black;
   			}
   		}
 
@@ -3463,13 +3916,19 @@ section{
 
   	.last-line{
   		padding-bottom: 30px;
+  		flex-direction: row;
   		a{
   			border-left: 1px solid black;
   			text-decoration: none;
   			color: black;
   			padding: 0 10px;
-  			font-size: 1.1em;
+  			font-size: 0.7em;
   			z-index: 10;
+  			margin-bottom: 6px;
+  			@include tablet{
+  				font-size: 1.1em;
+  				margin-bottom: 0;
+  			}
   			&:first-child{
   				border: none;
   			}
@@ -3526,17 +3985,23 @@ section{
 
 
 .tab-slid{
-	
+	width: 95%;
 	max-width: 1000px;
 	margin: auto;
 	background-color: white;
 	box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
 	border-radius: 10px;
 	border: solid 1px #ccc;
-	padding: 30px;
+	padding: 5px;
+	overflow: hidden;
+	padding-top: 30px;
+	@include tablet{
+		padding: 30px;
+	}
 
 	.woocommerce-tabs{
 		flex: 1;
+		width: 100%;
 		.panel{
 			padding: 0!important;
 			background-color: #fff!important;
@@ -3545,52 +4010,85 @@ section{
 		ul.tabs li{
 			background-color: white!important;
 			border: none!important;
-			font-size: 1.1em;
+			font-size: 0.8em;
 			font-weight: bold;
+			@include tablet{
+				font-size: 1.1em;
+			}
 		}
 		ul.tabs{
 			margin-bottom: 20px!important;
 			padding-left: 0!important;
+			width: 100%;
 			&:before{
 				border-bottom: 2px solid $cta-color!important;
 			}
 		}
 		p{
-			font-size: 1.2em;
+			font-size: 0.9em;
+			width: 90%;
+			@include tablet{
+				font-size: 1.2em;
+			}
 		}
 	}
 
 	.img{
-		width: 350px;
-		height: 350px;
+		width: 100%;
+		height: 180px;
 		border-radius: 20px;
 		background: transparent url('assets/images/bohea26.jpg') no-repeat top center;
 		background-size: cover;
+		@include tablet{
+			width: 350px;
+			height: 350px;
+		}
 	}
 
 }
 
+.enque,
+.his{
+	p{
+		font-size: 1em;
+		width: 95%;
+		@include tablet{
+			font-size: 1.3em;
+		}
+	}
+}
+
 .enque{
 	text-align: center;
-	padding: 100px 0;
+	padding: 30px 0;
+	@include tablet{
+		padding: 100px 0;
+	}
 	p{
 		max-width: 800px;
 		margin: auto;
-		font-size: 1.3em;
 	}
 	&.special{
 		h2{
 			margin-bottom: 30px;
 		}
 		p{
-			font-size: 1.6em;
+			font-size: 1.1em;
 			margin-bottom: 30px;
+			@include tablet{
+				font-size: 1.6em;
+			}
 		}
 	}
 }
 
 .his{
-	margin-bottom: 80px;
+	margin-bottom: 20px;
+	text-align: center;
+	@include tablet{
+		text-align: left;
+		margin-bottom: 80px;
+	}
 	.columns{
 		.item{
 
@@ -3613,22 +4111,37 @@ section{
 			}
 
 			&:nth-child(1){
-				width: 35%;
+				width: 100%;
+				@include tablet{
+					width: 35%;
+				}
 			}	
 			&:nth-child(2){
-				width: 60%;
-				
+				width: 100%;
+				@include tablet{
+					width: 60%;
+				}
 				.img{
 					width: 100%;
-					height: 600px;
+					height: 200px;
 					background: transparent url('assets/images/boheafeb6.jpg') no-repeat top left;
 					background-size: cover;
+					@include tablet{
+						height: 600px;
+					}
 
 				}
 			}
 			p{
 				
-				font-size: 1.3em;
+				
+				text-align: center;
+				margin-bottom: 15px;
+				@include tablet{
+					
+					text-align: left;
+					margin-bottom: 0;
+				}
 			}
 		}
 	}
@@ -3679,19 +4192,29 @@ section{
 .porque{
 	text-align: center;
 	margin-bottom: 100px;
+	h3{
+				font-size: 0.8rem!important;
+				@include tablet{
+					font-size: 1.2rem!important;
+				}
+			}
 	.columns{
 		max-width: 1000px;
 		margin-top: 50px;
 		.item{
 			.img{
-				width: 250px;
-				height: 250px;
+				width: 150px;
+				height: 150px;
 				border-radius: 50%;
 				background: transparent url('assets/images/montanas.png') no-repeat top left;
 				background-size: cover;
 				margin: auto;
 				box-shadow: 3px 3px 3px rgba(0,0,0,0.3);
 				margin-bottom: 20px;
+				@include tablet{
+					width: 250px;
+					height: 250px;
+				}
 			}
 			&:nth-child(1){
 				.img{
@@ -3711,12 +4234,14 @@ section{
 					background-size: cover;
 				}
 			}
+
 		}
 	}
 }
 
 .links{
 	margin-bottom: 50px;
+	flex-direction: row;
 	a{
 		margin-left: 20px;
 		&:nth-child(1){
@@ -3724,10 +4249,14 @@ section{
 		}
 	}
 	.contact-img{
-		width: 50px;
-		height: 50px;
+		width: 25px;
+		height: 25px;
 		border-radius: 50%;
 		background-color: red;
+		@include tablet{
+			width: 50px;
+			height: 50px;
+		}
 		svg{
 			width: 100%;
 			height: auto;
@@ -3759,6 +4288,14 @@ section{
 			.img{
 				height: 220px;
 			}
+		}
+	}
+
+	h4{
+		width: 85%;
+		margin: auto;
+		@include tablet{
+			width: auto;
 		}
 	}
 	
@@ -3850,17 +4387,26 @@ section{
 
 .details-pro{
 	position: relative;
-	margin-top: 180px;
+	margin-top: 30px;
+	padding: 50px 0;
+	@include tablet{
+		margin-top: 180px;
+		padding: 0;
+	}
 	.details-pro-bg{
 		position: absolute;
 		width: 100%;
-		height: 250%;
+		height: 100%;
 		z-index: -1;
 		left: 0;
-		top: -20%;
+		top: 0%;
 		//transform: translate(0,-50%);
 		background: transparent url('assets/images/fondos_bohea_humo-01.png') no-repeat top ;
 		background-size: cover;
+		@include tablet{
+			height: 250%;
+			top: -20%;
+		}
 	}
 
 }
@@ -3869,8 +4415,8 @@ section{
 	position: fixed;
 	right: 0;
 	bottom: 0;
-	left: 0%;
-	transform: translate(0%, 0%);
+	left: 50%;
+	transform: translate(-50%, 0%);
 	height: auto;
 	padding: 5px;
 	z-index: 1000;
@@ -3883,7 +4429,9 @@ section{
 	flex-wrap: wrap;
 	justify-content: center;
 	align-items: center;
-	width: 60px;
+	width: 160px;
+	padding: 5px 0px 5px 0px;
+	//width: auto;
 	@include tablet{
 		padding: 5px 0px 5px 0px;
 		
@@ -3898,12 +4446,16 @@ section{
 		border-radius: 6px 0 0 6px;
 	}
 	.has-svg{
-		width: 35px;
-		height: 35px;
+		width: 25px;
+		height: 25px;
 		margin-right: 25px;
 		position: relative;
 		transform: scale(1);
 		transition: all 0.3s ease;
+		@include tablet{
+			width: 35px;
+			height: 35px;
+		}
 		&:hover{
 			transform: scale(0.7);
 		}
@@ -3977,4 +4529,542 @@ section{
 .woocommerce-cart .woocommerce,
 .woocommerce-checkout .woocommerce{
 	margin-bottom: 100px;
+}
+
+.summary-add-to-cart-form-bundle,
+.summary-add-to-cart-form-composite{
+	width: 95%;
+	margin: auto;
+	max-width: 800px;
+}
+
+.composited_product_details_wrapper{
+	.composited_product_images{
+		//display: none;
+	}
+	.dedetails{
+		width: 100%!important;
+		float: none!important;
+	}
+}
+
+.wc-pao-addon-image-swatch img{
+
+	max-width: 250px!important;
+	max-height: none!important;
+	height: auto;
+	width: 250px;
+
+}
+
+.showcase{
+
+	width: 95%;
+	max-width: 800px;
+	margin: auto;
+	text-align: center;
+	img{
+		display: block;
+		width: 100%;
+		height: auto;
+	}
+
+}
+
+.galeria{
+
+	background-color: white;
+	text-align: center;
+	position: relative;
+	margin-top: 80px;
+	.line{
+		position: absolute;
+		top: 0;
+		left: 50%;
+		border-top: solid 1px #ccc;
+		width: 80%;
+		max-width: 800px;
+		transform: translate(-50%, 0);
+	}
+
+	>h2{
+		text-align: center;
+	}
+
+	.columns{
+		width: 100%;
+		max-width: 800px;
+		flex-direction: row;
+		.item{
+			width: 30.3%;
+			margin: 0 1%;
+			
+			height: 100px;
+			
+			position: relative;
+			@include tablet{
+				height: 200px;
+			}
+			&:nth-child(1){
+				.img{
+					//background: transparent resolve('assets/images/instalaciones3.jpg') no-repeat center;
+					//background-size: cover;
+				}
+			}
+
+			&:nth-child(2){
+				.img{
+					
+				}
+			}
+
+			&:nth-child(3){
+				.img{
+					
+				}
+			}
+			a{
+				width: 100%;
+				height: 100%;
+				display: none;
+				&:nth-child(1){
+					display: block;
+				}
+			}
+			.img{
+				width: 100%;
+				height: 100%;
+				position: absolute;
+				left: 0;
+				top: 0;
+			
+				position: relative;
+				.overlay{
+					background: rgb(7,61,173);
+					background: -moz-linear-gradient(180deg, rgba(7,61,173,0) 0%, rgba(7,61,173,1) 100%);
+					background: -webkit-linear-gradient(180deg, rgba(7,61,173,0) 0%, rgba(7,61,173,1) 100%);
+					background: linear-gradient(180deg, rgba(7,61,173,0) 0%, rgba(7,61,173,1) 100%);
+					filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#073dad",endColorstr="#073dad",GradientType=1);
+					width: 100%;
+					height: 50%;
+					position: absolute;
+					bottom: 0;
+					left: 0;
+					opacity: 0;
+				}
+			}
+			p{
+				position: absolute;
+				bottom: 0;
+				color: white;
+				width: 100%;
+				padding: 10px 3%;
+				text-align: center;
+				opacity: 0;
+			}
+
+		}
+	}
+}
+
+.formulario{
+	width: 95%;
+	max-width: 500px;
+	margin: 50px auto 0 auto;
+	@include tablet{
+		max-width: 1000px;
+	}
+
+	.wpforms-field-text,
+	.wpforms-field-label{
+		//max-width: 500px;
+		//margin: auto!important;
+	}
+	.wpforms-field-label{
+		margin-bottom: 30px!important;
+		@include tablet{
+			font-size: 1.4rem!important;
+		}
+	}
+	.wpforms-image-choices{
+		@include tablet{
+			
+		}
+
+	}
+}
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern img{
+	//max-width: 200px!important;
+}
+
+.wpforms-image-choices{
+	li{
+		//width: 33.3%!important;
+		//margin: 0!important;
+	}
+}
+
+div.wpforms-container-full .wpforms-form button[type=submit]{
+	background-color: $cta-color!important;
+	color: white!important;
+	font-weight: bold;
+	text-transform: uppercase;
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-label{
+
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-number-slider .wpforms-field-number-slider-hint{
+
+	font-size: 1.1em!important;
+	//font-weight: bold;
+
+}
+
+div.wpforms-container-full .wpforms-form .wpforms-field-description{
+	font-size: 1em!important;
+}
+
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern .wpforms-image-choices-label{
+	font-size: 0.7em;
+	@include tablet{
+		font-size: 1.1em;
+		font-weight: bold;
+	}
+}
+
+div.formulario{
+
+	form.wpforms-form .wpforms-list-3-columns ul li {
+	    width: 33.3333%!important;
+	    display: block;
+	    padding-right: 0px!important;
+	    @include tablet{
+	    	width: 33.3333%!important;
+	    	display: block;
+	    	padding-right: 26px!important;
+	    }
+	}
+
+	>a{
+		pointer-events: auto;
+		.m-btn{
+			opacity: 1;
+		}
+
+		&.disableds{
+			pointer-events: none;
+			opacity: 0.3;
+			cursor: default;
+			.m-btn{
+				opacity: 0.3;
+			}
+		}
+	}
+
+	.m-btn{
+		max-width: 250px;
+		margin: 0 auto 10px auto;
+		padding-right: 30px;
+		position: relative;
+		
+		.svg-icon{
+			width: 20px;
+			display: inline-block;
+			margin-left: 10px;
+			position: absolute;
+			transform: translate(0, -5px);
+			svg{
+				width: 100%;
+				height: auto;
+				fill: white
+			}
+		}
+	}
+
+}
+
+div.wpforms-container-full .wpforms-form button[type=submit]{
+	display: none;
+}
+
+.max-qty{
+	position: relative;
+	.max-qty-message{
+		//opacity: 1;
+	}
+	&:hover{
+		.max-qty-message{
+			opacity: 1;	
+		}
+	}
+}
+
+.max-qty-message{
+	//display: none;
+
+	position: absolute;
+	background-color: red;
+	width: 200px;
+	padding: 5px;
+	color: white;
+	opacity: 0;
+	transition: all 0.3s ease;
+	span{
+		display: block;
+		font-size: 0.8rem;
+		margin-top: 10px;
+	}
+}
+
+#conektaIframeContainer{
+
+	height: 800px!important;
+
+}
+#test_field{
+	font-size: 1em;
+	    text-align: center;
+	    letter-spacing: 1.5px;
+	    text-transform: uppercase;
+	    font-weight: bold;
+	    margin-top: 30px;
+}
+
+.single-product{
+	.woocommerce-error{
+		display: none;
+	}
+	.wc-pao-addon-name{
+		font-size: 1.4em;
+		margin-bottom: 30px;
+		width: 100%;
+		padding-top: 30px;
+		border-top: solid 1px #ccc;
+	}
+}
+
+.woocommerce-cart-form{
+	.bundle_table_item{
+		input{
+			pointer-events: none;
+		}
+	}
+	.bundled_table_item{
+		.product-remove{
+			opacity: 0;
+			pointer-events: none;
+		}
+		.product-quantity{
+			position: relative;
+			&:after{
+				
+			}
+		}
+		input{
+			//display: none;
+			pointer-events: none;
+			position: relative;
+			border: none!important;
+			&::-webkit-outer-spin-button,
+			&::-webkit-inner-spin-button{
+				-webkit-appearance: none;
+  				margin: 0;
+			}
+			&:focus{
+				border: none!important
+			}
+
+		}
+	}
+}
+
+.bundle_container_mini_cart_item{
+	.smcw-item-quty{
+		padding-left: 10px;
+	}
+	.smcw-quantity{
+		display: none!important;
+	}
+}
+
+a{
+	text-decoration: none;
+}
+
+.faq{
+	width: 100%;
+	//max-width: 800px;
+	margin: auto;
+	.item{
+		border-bottom: solid 1px #ccc;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+		&:hover{
+			.visible{
+				cursor: pointer;
+				h4{
+					color: $cta-color;
+
+				}
+				.arrows{
+					div{
+						border-bottom: solid 4px $cta-color;
+					}
+				}
+			}
+		}
+
+		.visible{
+			justify-content: space-between;
+			flex-direction: row;
+			align-items: flex-start;
+			h4{
+				text-transform: none;
+				font-size: 0.9rem;
+				color: black;
+				margin: 0!important;
+				flex: 1;
+				font-family: $body-font;
+				font-weight: normal;
+				@include tablet{
+					font-size: 0.9em;
+					margin: 15px;
+					letter-spacing: 1px;
+				}
+			}
+			.arrows{
+				position: relative;
+				width: 17px;
+				height: 17px;
+				div{
+					position: absolute;
+					left: 50%;
+					top: 50%;
+					width: 100%;
+					height: 2px;
+					border-bottom: solid 4px #ccc;
+					&:nth-child(1){
+						transform: rotate(90deg);
+					}
+				}
+			}
+		}
+		.info{
+			height: 0;
+			overflow: hidden; 
+			//padding-bottom: 2px;
+			background-color: #fff;
+
+			p{
+				font-size: 0.9em;
+				width: 90%;
+				margin: 0 auto 20px auto;
+				@include tablet{
+					font-size: 0.9rem;
+				}
+				&:first-child{
+					padding-top: 20px;
+				}
+				&:last-child{
+					padding-bottom: 1px;
+				}
+			}
+			ul, ol{
+				width: 80%;
+				margin: 0 auto 15px auto;
+				li{
+					list-style: disc;
+					margin-bottom: 10px;
+				}
+			}
+			ol{
+				li{
+					list-style-type: decimal;
+				}
+			}
+		}
+		&.active{
+			.visible{
+				cursor: pointer;
+				h4{
+					color: $cta-color;
+				}
+				.arrows{
+					div{
+						border-bottom: solid 4px $cta-color;
+					}
+				}
+			}
+			.info{
+				height: 100%;
+			}
+		}
+	}
+
+}
+.product-type-bundle{
+	table{
+		tr{
+			&.product{
+				position: relative;
+				//margin-bottom: 60px;
+				&:not(.has_qty_input){
+					.bundled_qty{
+						display: none;
+					}
+				}
+				&:after{
+					content: "";
+					position: absolute;
+					width: 95%;
+					height: 1px;
+					border-top: solid 1px #ccc;
+					left: 50%;
+					bottom: 0%;
+					transform: translate(-50%);
+				}
+				&:last-child{
+					&:after{
+						display: none;
+					}
+				}
+				p{
+					@include tablet{
+						font-size: 1.2em;
+					}
+				}
+				.bundled_item_cart_details{
+					.stock{
+						margin-top: 20px!important;
+						display: block
+					}
+				}
+				.bundled_product_title_inner{
+					.item_title{
+						text-transform: lowercase;
+						display: inline-block;
+						&:first-letter{
+							text-transform: uppercase;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:not(.wpforms-error):hover, div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:not(.wpforms-error):focus {
+    border: 3px solid #ddd!important; 
+}
+
+.store-info-container .right .woocommerce.columns-3{
+	>div{
+		&:last-of-type{
+			form, p{
+				display: none;
+			}
+		}
+	}
 }

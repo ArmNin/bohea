@@ -29,7 +29,11 @@ Displays single posts
 
 	        	    			<div class="btn-info flex-normal">
 	        	    				
-	        	    				<div class="m-btn m-btn--main">Comprar</div>
+	        	    				<a href="<?php echo get_site_url() ?>/shop">
+
+	        	    					<div class="m-btn m-btn--main">Comprar</div>
+
+	        	    				</a>
 
 	        	    				<div class="img"></div>
 
@@ -234,7 +238,7 @@ Displays single posts
 
 		<div class="btn-container flex-normal">
 			
-			<a href="<?php echo get_site_url() ?>/tienda">
+			<a href="<?php echo get_site_url() ?>/shop">
 				<div class="m-btn m-btn--main">Visita nuestra tienda</div>
 			</a>
 

@@ -6,11 +6,11 @@ add_action( 'wp_enqueue_scripts', 'wpt_theme_styles' );//add to the header the r
 add_action( 'wp_enqueue_scripts', 'wpt_theme_js' );//add to the very bottom of the html the related code files
 add_action( 'after_setup_theme', 'woocommerce_support' );//add woocommerce support
 //add_action( 'template_redirect', 'remove_woocommerce_styles_scripts', 999 );// remove all scripts from none woocommerce pages
-add_action( 'wp_head', 'gtm',20 );//add gtm tag
+//add_action( 'wp_head', 'gtm',20 );//add gtm tag
 
 //add Filters
 //////////////
-add_filter( 'woocommerce_checkout_fields' , 'custom_remove_woo_checkout_fields' );//remove fields from checkout
+//add_filter( 'woocommerce_checkout_fields' , 'custom_remove_woo_checkout_fields' );//remove fields from checkout
 
 //add Functions
 ///////////////
@@ -19,6 +19,7 @@ function wpt_theme_styles() {// get the necesary files for the style of the them
 	//wp_enqueue_style( 'googlefont2_css', 'https://fonts.googleapis.com/css?family=Itim&text=Woof%26',20 );
   wp_enqueue_style( 'main_css', get_template_directory_uri() . '/style.css', 'all' );
   wp_enqueue_style( 'slider_css', get_template_directory_uri() . '/assets/css/flexslider.css', 'all' );
+  wp_enqueue_style( 'lightbox_css', get_template_directory_uri() . '/assets/css/lightbox.css', 'all' );
 	
   /* Remove woocommerce styles from non Woocomemrce pages
   if ( function_exists( 'is_woocommerce' ) ) {
@@ -60,6 +61,7 @@ function woocommerce_support() {// add support
     add_theme_support( 'wc-product-gallery-lightbox' );
     add_theme_support( 'wc-product-gallery-slider' );
 }
+
 
 // Update WooCommerce Flexslider options
 
@@ -171,7 +173,7 @@ add_action('woocommerce_shop_loop_item_title','test2', 5);
 
 function test2(){
 
-    echo "<div class='bg-product-img-1'></div><div class='bg-product-img-2'></div></div>";
+    echo "<div class='bg-product-img-1' style='background: transparent url(".get_field('cir').") no-repeat center; background-size: 140% auto;'></div></div>";
 
 }
 
@@ -402,7 +404,7 @@ function add_coupon_notice_mini_cart($total) {
 
 
     // get_user
-    $user = new WP_User(get_current_user_id()); 
+    //$user = new WP_User(get_current_user_id()); 
 
     /*
     * Lista2 -> Precio Publico -> MinCom = 0 / Desc = 0
@@ -412,144 +414,37 @@ function add_coupon_notice_mini_cart($total) {
     */
 
         $cart_total = $total;
-        $minimum_amount_l2 = 2500;
+        $minimum_amount_l2 = 3000;
         $minimum_amount_l3 = 15000;
         $minimum_amount_l4 = 90000;
         $currency_code = get_woocommerce_currency();
         //wc_clear_notices();
 
-       /* 
-       if ( $cart_total < $minimum_amount_l2 ) {
-              WC()->cart->remove_coupon( 'Nivel1' );
-              wc_print_notice( "Obten un 50% de descuento si gastas más de $minimum_amount_l2 $currency_code!", 'notice' );
-        } else {
-              WC()->cart->apply_coupon( 'Nivel1' );
-              wc_print_notice( 'Ya tienes 50% de descuento para tu compra!', 'notice' );
-        }
+    $message1 = "";    
 
-    */
-
-        //var_dump( $user->roles );
-
-    if ( in_array( 'userLista4', (array) $user->roles ) || in_array( 'userLista3', (array) $user->roles ) || in_array( 'userLista2', (array) $user->roles ) ) {    
-
-        if ( in_array( 'userLista4', (array) $user->roles ) ) {
-
-            wc_print_notice( '¡Felicidades! Por tu nivel de usuario, ya tienes aplicado el 66.60% de descuento para tu compra!', 'notice' );
-
-             WC()->cart->apply_coupon( '66.60% desc' );
-
-        }
-
-        if ( in_array( 'userLista3', (array) $user->roles ) ){
-
-            wc_print_notice( '¡Felicidades! Por tu nivel de usuario, ya tienes aplicado el 56.60% de descuento para tu compra!', 'notice' );
-
-             WC()->cart->apply_coupon( '-56.60%' );
-
-        }
-
-        if ( in_array( 'userLista2', (array) $user->roles ) ){
-
-            wc_print_notice( '¡Felicidades! Por tu nivel de usuario, ya tienes aplicado el 50% de descuento para tu compra!', 'notice' );
-
-             WC()->cart->apply_coupon( '-50%' );
-
-        }
-
-    }else{
-
-        if ( $cart_total < $minimum_amount_l4 ) {
+    if ( $cart_total < $minimum_amount_l2 ) {
 
 
-               WC()->cart->remove_coupon( '66.60% Desc' );
+           WC()->cart->remove_coupon( '30% Desc' );
 
-               if ( $cart_total > $minimum_amount_l3 ) {
-                    
-                    $message1 = "<p>Obten un <span>10% de descuento extra</span> si agregas más de <span>$90,000</span> al carrito!</p>";
-
-               }
-               
-               /*
-               * Next tier
-               */
-
-               if ( $cart_total < $minimum_amount_l3 ) {
-                      
-                      WC()->cart->remove_coupon( '66.60% Desc' );
-                      WC()->cart->remove_coupon( '56.50% desc' );
-
-                      if ( $cart_total > $minimum_amount_l2 ) {
-
-                        $message1 = "<p>Obten un <span>6.50% de descuento extra</span> si agregas más de <span>$15,000</span> a tu carrito!</p>";
-
-                        
-
-                    }
-
-                      /*
-                      * Next tier
-                      */
-
-                      if ( $cart_total < $minimum_amount_l2 ) {
-                             
-                             WC()->cart->remove_coupon( '66.60% Desc' );
-                             WC()->cart->remove_coupon( '56.50% desc' );
-                             WC()->cart->remove_coupon( '50% desc' );
-
-                             $message1 ="<p>Obten un <span>50% de descuento</span> si gastas más de <span>$2,500!</span></p>";
+                
+            $message1 = "<p>Obten un <span>30% de descuento</span> si agregas más de <span>$3,000</span> al carrito!</p>";
 
 
+     } 
+
+    if ( $cart_total >= $minimum_amount_l2 ) {
 
 
-                       } else {// if is equal or above the target >= $5,000
+            WC()->cart->apply_coupon( '30% Desc' );
 
-                             /*
-                             WC()->cart->remove_coupon( '66.60% Desc' ); 
-                             WC()->cart->remove_coupon( '56.50% desc' ); 
-                               WC()->cart->apply_coupon( '50% desc' );
-                             wc_print_notice( '¡Felicidades! Por el monto de tu pedido, ya tienes aplicado el 50% de descuento para tu compra!', 'notice' );
-                             */
-
-                             WC()->cart->remove_coupon( '66.60% Desc' ); 
-                             WC()->cart->remove_coupon( '56.50% desc' ); 
-                               
-                               WC()->cart->apply_coupon( '50% desc' );
-
-                             $message = '<p>¡Felicidades! Por el monto de tu pedido, ya tienes aplicado el <span>50%</span> de descuento para tu compra!</p>';
+                 
+             $message1 = "<p>¡Felicidades! <span> Ya tienes el 30% de descuento</span>  aplicadoo a tu carrito!</p>";
 
 
-                       }
+    } 
 
-
-                } else {// if is equal or above the target >= $16,000
-
-
-                      WC()->cart->remove_coupon( '66.60% Desc' );
-                      WC()->cart->remove_coupon( '50% desc' );    
-                        
-                        WC()->cart->apply_coupon( '56.50% desc' );
-
-                      $message ='<p>¡Felicidades! Por el monto de tu pedido, ya tienes aplicado el <span>56.50%</span> de descuento para tu compra!</p>';
-
-                }
-
-         } else {// if is equal or above the target >= $90,000
-
-            
-
-               
-               WC()->cart->remove_coupon( '56.50% desc' );
-               WC()->cart->remove_coupon( '50% desc' );
-
-                WC()->cart->apply_coupon( '66.60% Desc' );
-
-               $message = '<p>¡Felicidades! Por el monto de tu pedido, ya tienes aplicado el <span>66.60%</span> de descuento para tu compra!</p>';
-
-
-         }
-
-    }    
+    
 
     return $message.$message1;
 
@@ -576,6 +471,8 @@ function increase_qty() {
             die ( 'Busted!');
         }
 
+    //$product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));    
+
     $cart_item_key = sanitize_text_field($_POST['item_key']);
     $quantity = sanitize_text_field($_POST['currentVal']);
     WC()->cart->set_quantity($cart_item_key, $quantity, $refresh_totals = true);
@@ -594,6 +491,7 @@ function increase_qty() {
     $sub_total_price = WC()->cart->get_cart_subtotal();//WC()->cart->get_subtotal();     
     $tax_calculate = wc_round_tax_total(WC()->cart->get_cart_contents_tax() + WC()->cart->get_shipping_tax() + WC()->cart->get_fee_tax());
 
+   
     
     $coupons = [];
     
@@ -617,7 +515,8 @@ function increase_qty() {
         'sub_total' => $sub_total_price,
         'tax_price' => $tax_calculate,
         'coupons' => $coupons,
-        'message' => $message
+        'message' => $message,
+        //'id' => $product_id
     );
 
     echo json_encode($response);
@@ -665,7 +564,7 @@ function decrease_qty() {
     $sub_total_price = WC()->cart->get_cart_subtotal();//WC()->cart->get_subtotal();     
     $tax_calculate = wc_round_tax_total(WC()->cart->get_cart_contents_tax() + WC()->cart->get_shipping_tax() + WC()->cart->get_fee_tax());
 
-    WC()->cart->apply_coupon( 'test' );
+   
 
     $coupon_name = [];
     $coupon_total = []; 
@@ -701,18 +600,24 @@ add_action('wp_ajax_nopriv_smcw_minus_action2', 'increase_qty');
 
 
 
-    add_filter( "woocommerce_loop_add_to_cart_args", "filter_wc_loop_add_to_cart_args", 20, 2 );
+add_filter( "woocommerce_loop_add_to_cart_args", "filter_wc_loop_add_to_cart_args", 20, 2 );
 
 
 function filter_wc_loop_add_to_cart_args( $args, $product ) {
 
-    if(is_page_template('page-templates/page-kit.php')){
+    //if(is_page_template('page-templates/page-kit.php')){
 
-        if ( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ) {
+        /*if ( $product->supports( 'ajax_add_to_cart' ) && $product->is_purchasable() && $product->is_in_stock() ) {
             $args['attributes']['data-kit'] = "kit";
-        }
+        }*/
+
+    if(is_page_template('page-templates/page-kit.php')){    
+
+        $args['attributes']['data-kit'] = "kit";
 
     }
+
+    //}
     return $args;
 }
 
@@ -761,7 +666,12 @@ function gg(){
 
 remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_product_data_tabs', 10);
 
-add_action('hook_secreto', 'woocommerce_output_product_data_tabs', 10);
+remove_action( 'woocommerce_after_single_product_summary', 'woocommerce_output_related_products', 20);
+
+
+//add_action('hook_secreto', 'woocommerce_output_product_data_tabs', 10);
+
+add_action('hook_secreto2', 'woocommerce_output_related_products', 10);
 
 /**
  * Rename product data tabs
@@ -774,6 +684,301 @@ function woo_rename_tabs( $tabs ) {
     $tabs['additional_information']['title'] = __( 'Ingredientes' );    // Rename the additional information tab
 
     return $tabs;
+
+}
+
+/*
+add custom field to products when they are on kit page.
+The filed will be used as a flag to send on the event when the product is added by ajax and then the field will be checked against a condition to group all the products that has that flog enabled
+*/
+
+
+//add_action('woocommerce_after_shop_loop_item','wdm_add_custom_fields');
+/**
+ * Adds custom field for Product
+ * @return [type] [description]
+ */
+function wdm_add_custom_fields()
+{
+
+    global $product;
+
+    ob_start();
+
+    ?>
+        
+    value<input type="hidden" name="kit" value="kit">
+       
+
+    <?php
+
+    $content = ob_get_contents();
+    ob_end_flush();
+
+    return $content;
+}
+
+
+add_action('wp_ajax_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+add_action('wp_ajax_nopriv_woocommerce_ajax_add_to_cart', 'woocommerce_ajax_add_to_cart');
+
+function woocommerce_ajax_add_to_cart(){
+
+    $product_id = apply_filters('woocommerce_add_to_cart_product_id', absint($_POST['product_id']));
+
+}
+
+/*
+Function that recieves the params of the product that is being addeded to the cart.
+The info recieved will be used to put info in the order so the products can be shown
+and grouped as products in a kit in the front end( cart, mini cart and check out) mail and orders 
+*/
+
+function build_kit(){
+
+    // Check for nonce security
+        $nonce = sanitize_text_field( $_POST['_wpnonce'] );
+
+        if ( ! wp_verify_nonce( $nonce, 'frontend-ajax-nonce' ) ) {
+            die ( 'Busted!');
+        }
+
+        $product_id = sanitize_text_field($_POST['productId']);
+
+        $variation_id = sanitize_text_field($_POST['variationId']);
+
+        $message = "El id que se mando fue: ".$product_id." con la variación ".$variation_id;
+
+        $response = array(
+            'message' => $message,
+            //'id' => $product_id
+        );
+
+        echo json_encode($response);
+
+        /*
+        $cart = WC()->cart->cart_contents;
+
+         foreach( $cart as $cart_item_id=>$cart_item ) {
+
+            $cart_item['new_meta_data'] = 'Your stuff goes here';
+            WC()->cart->cart_contents[$cart_item_id] = $cart_item;
+
+         }
+
+         WC()->cart->set_session();
+         */
+        
+        /**
+         * Add custom cart item data
+         */
+
+        
+        
+        
+        
+
+        die();
+
+}
+
+
+
+add_action('wp_ajax_notify_kit', 'build_kit');
+add_action('wp_ajax_nopriv_notify_kit', 'build_kit');
+
+
+
+add_filter('woocommerce_add_cart_item_data','wdm_add_item_data',10,3);
+
+/**
+ * Add custom data to Cart
+ * @param  [type] $cart_item_data [description]
+ * @param  [type] $product_id     [description]
+ * @param  [type] $variation_id   [description]
+ * @return [type]                 [description]
+ */
+function wdm_add_item_data($cart_item_data, $product_id, $variation_id)
+{
+    if(isset($_REQUEST['kit']))
+    {
+        $cart_item_data['kit'] = sanitize_text_field($_REQUEST['kit']);
+    }
+
+    return $cart_item_data;
+}
+
+/*
+
+function plugin_republic_add_cart_item_data( $cart_item_data, $product_id, $variation_id ) {
+         if( isset( $_POST['pr-field'] ) ) {
+            //$cart_item_data['kit'] = sanitize_text_field( $_POST['pr-field'] );
+            $cart_item_data['kit'] = "kit";
+         }
+         return $cart_item_data;
+        }
+        add_filter( 'woocommerce_add_cart_item_data', 'plugin_republic_add_cart_item_data', 10, 3 );
+
+*/
+
+/**
+ * Display custom item data in the cart
+ */
+function plugin_republic_get_item_data( $item_data, $cart_item_data ) {
+ if( isset( $cart_item_data['kit'] ) ) {
+ $item_data[] = array(
+    'key' => __( 'En tu kit', 'plugin-republic' ),
+    'value' => wc_clean( $cart_item_data['kit'] )
+ );
+ }
+ return $item_data;
+}
+add_filter( 'woocommerce_get_item_data', 'plugin_republic_get_item_data', 10, 2 );        
+
+/**
+ * Override loop template and show quantities next to add to cart buttons
+ */
+//add_filter( 'woocommerce_loop_add_to_cart_link', 'quantity_inputs_for_woocommerce_loop_add_to_cart_link', 10, 2 );
+function quantity_inputs_for_woocommerce_loop_add_to_cart_link( $html, $product ) {
+    if ( $product && $product->is_type( 'variable' ) && $product->is_purchasable() && $product->is_in_stock() && ! $product->is_sold_individually() ) {
+        $html = '<form action="' . esc_url( $product->add_to_cart_url() ) . '" class="cart" method="post" enctype="multipart/form-data">';
+        $html .= woocommerce_quantity_input( array(), $product, false );
+        $html .= '<button type="submit" class="button alt">' . esc_html( $product->add_to_cart_text() ) . '</button>';
+        $html .= '</form>';
+    }
+    return $html;
+}
+
+
+if( function_exists('acf_add_options_page') ) {
+  
+  acf_add_options_page(array(
+    'page_title'  => 'Información general',
+    'menu_title'  => 'Info General',
+    'menu_slug'   => 'theme-general-settings',
+    'capability'  => 'edit_posts',
+    'redirect'    => false
+  ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Página Inicio',
+    'menu_title'  => 'Pag. Inicio',
+    'parent_slug' => 'theme-general-settings',
+  ));
+
+}
+
+add_filter( 'woocommerce_add_to_cart_fragments', function($fragments) {
+
+    ob_start();
+    ?>
+
+    <div class="cart-contents">
+        <?php echo WC()->cart->get_cart_contents_count(); ?>
+    </div>
+
+    <?php $fragments['div.cart-contents'] = ob_get_clean();
+
+    return $fragments;
+
+} );
+
+add_filter('gettext', 'translate_text');
+function translate_text($translated) {
+ $translated = str_ireplace('Detalles de facturación', 'Tus datos', $translated);
+ return $translated;
+}
+
+add_filter('gettext', 'translate_text2');
+function translate_text2($translated) {
+ $translated = str_ireplace('Includes', 'Inlcuye', $translated);
+ return $translated;
+}
+
+add_filter('woocommerce_cart_item_permalink','__return_false');
+
+
+function change_product_name() {
+
+    global $product;
+
+    $product = wc_get_product( get_the_id() );
+
+    if ( is_product() ){
+
+        if ($product->get_type() == 'bundle') {
+
+            add_filter('woocommerce_product_single_add_to_cart_text', 'woo_custom_cart_button_text',1);
+            function woo_custom_cart_button_text() {
+            return __('Comprar Kit', 'woocommerce');
+            }
+
+        }
+
+    }
+
+
+}
+
+add_action( 'wp_head', 'change_product_name' );
+
+
+//add_action('woocommerce_after_add_to_cart_form', 'extra_product_info');
+add_action('woocommerce_single_product_summary', 'extra_product_info', 70);
+
+function extra_product_info(){
+
+    global $product;
+
+    $product = wc_get_product( get_the_id() );
+
+    if ($product->get_type() !== 'bundle') {
+
+        echo '<div class="faq">
+
+            <div class="item">
+
+                <div class="visible flex-normal">
+                    
+                    <h4>Modo de uso</h4>
+
+                    <div class="arrows">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    
+                    '.get_field("modo_de_uso").'
+
+                </div>
+
+            </div>
+
+            <div class="item">
+
+                <div class="visible flex-normal">
+                    
+                    <h4>Ingredientes</h4>
+
+                    <div class="arrows">
+                        <div></div>
+                        <div></div>
+                    </div>
+                </div>
+
+                <div class="info">
+                    
+                   <p>'.get_field("ingredientes").'</p>
+
+                </div>
+
+            </div>
+
+        </div>';
+
+    }    
 
 }
 

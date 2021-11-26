@@ -16,7 +16,7 @@
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="page-wrapper">
+	
 		
 		<nav class="nav l-nav flex-normal">
 

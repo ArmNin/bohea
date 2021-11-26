@@ -31,6 +31,108 @@ if ( post_password_required() ) {
 	return;
 }
 ?>
+
+<?php 
+
+	// Get Product ID
+  	if( "123" == $product->get_id()){ ?>
+
+  		<style>
+  			
+  			.details-pro-bg,
+  			.tab-slid,
+  			.related{
+  				display: none;
+  			}
+
+  		</style>
+
+  	<?php } ?>	
+
+	<?php if( "181" == $product->get_id()){ ?>
+
+		<style>
+			
+			.woocommerce-product-gallery,
+			.entry-summary,
+			.details-pro-bg,
+			.tab-slid{
+				display: none;
+			}
+
+		</style>
+
+		<header class="store">
+
+		    <div class="bg">
+		        <img class="img" src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/bg-main.webp" alt="">
+		    </div>
+		    
+		    <div class="columns columns--triple flex-normal">
+		        
+		        <!--
+		        <div class="item left">
+		            
+		            <div class="img"></div>
+
+		            <div class="plant plant--up"></div>
+
+		        </div>
+		        -->
+
+		        <div class="item middle">
+		            
+		            <div class="slider">
+
+		                <h1 class="special">Crea tu marca</h1>
+
+		                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident nobis quisquam quia, aut distinctio excepturi. </p>
+
+		                  <div class="m-btn m-btn--main">Crear ahora</div>
+
+		              </br>
+
+		                  <div class="m-btn m-btn--secondary">¿Como funciona?</div>
+
+		            </div>
+
+		            
+
+		        </div>
+
+		        <div class="item right">
+		            
+		            <!--
+		            <h6>Arma tu kit</h6>
+
+		            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. </p>
+		            -->
+
+		            <div class="plant plant--up-rotate">
+		                <div class="img"></div>
+		            </div>
+
+		            <div class="btn-info flex-normal">
+		                
+		                
+
+		                <div class="img special"></div>
+
+		            </div>
+
+		            
+
+		        </div>
+
+		    </div>
+
+		</header>
+
+	<?php }
+
+?>
+
+
 <div id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 
 	<?php
@@ -71,10 +173,44 @@ if ( post_password_required() ) {
 	 */
 	do_action( 'woocommerce_after_single_product_summary' );
 	?>
+
 </div>
 
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'details-pro', $product ); ?>>
 
+	<!--
+	<div class="details-pro-bg"></div>
 
+	<div class="tab-slid flex-normal">
+		
+		<?php do_action( 'hook_secreto' ); ?>
+
+		<div class="img"></div>
+
+	</div>
+	-->
+
+</div>
+
+<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'details-pro', $product ); ?>>
+	
+	<?php do_action( 'hook_secreto2' ); ?>
+
+</div>
+
+<?php if( "181" == $product->get_id()){ ?>
+
+	<div class="showcase">
+
+		<h3 class="title">Trabajos realizados</h3>
+		
+		<img src="<?php echo get_stylesheet_directory_uri() ?>/assets/images/vv.jpg" alt="">
+
+	</div>
+
+<?php } ?>
+
+<!--
 <div class="product-more">
 	
 	<div class="img"></div>
@@ -88,19 +224,8 @@ if ( post_password_required() ) {
 	</div>
 
 </div>
+-->
 
-<div id="product-<?php the_ID(); ?>" <?php wc_product_class( 'details-pro', $product ); ?>>
 
-	<div class="details-pro-bg"></div>
-
-	<div class="tab-slid flex-normal">
-		
-		<?php do_action( 'hook_secreto' ); ?>
-
-		<div class="img"></div>
-
-	</div>
-
-</div>
 
 <?php do_action( 'woocommerce_after_single_product' ); ?>
