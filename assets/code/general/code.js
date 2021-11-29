@@ -82,6 +82,7 @@ jQuery(function ($) {
 	$("#form-to-whatsapp form").on("change", function(e){
 		
 		//console.log("changed");
+		//changes added
 
 		var name = $(this).find(".wpforms-field-text input[type=text]").first().val();
 
