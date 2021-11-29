@@ -13,193 +13,99 @@ Displays single posts
 
 			<div class="slides">
 
-                <div class="slide"><!--more-->
-                	
-                	<div class="content">
-                		
-                		<div class="content-main wc flex-normal" >
+        	     <?php if( have_rows('slider_inicio', 'options') ): ?>
+        	        
+        	         <?php while( have_rows('slider_inicio', 'options') ): the_row(); 
+        	             
+        	             // Load sub field value.
+			            $type = get_sub_field('type_link');	
 
-        	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/slider/s2.jpg) no-repeat center; background-size: cover;">
-
-        	    			</div>
-
-        	    			<div class="info-slide">
-
-        	    				<h1>Descubre tu esencia</h1>	
-
-	        	    			<div class="btn-info flex-normal">
-	        	    				
-	        	    				<a href="<?php echo get_site_url() ?>/shop">
-
-	        	    					<div class="m-btn m-btn--main">Comprar</div>
-
-	        	    				</a>
-
-	        	    				<div class="img"></div>
-
-	        	    			</div>
-
-        	    			</div>
-
-        	    		</div>
-
-        	    	</div>
-
-        	    </div>
-
-                <div class="slide"><!--more-->
-                	
-                	<div class="content">
-                		
-                		<div class="content-main flex-normal" >
-
-        	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/slider/s4.jpg) no-repeat center; background-size: cover;">
-
-        	    			</div>
-
-        	    		</div>
-
-        	    	</div>
-
-        	    </div>
-
-        	    <div class="slide"><!--more-->
-                	
-                	<div class="content">
-                		
-                		<div class="content-main flex-normal" >
-
-        	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/slider/s5.jpg) no-repeat center; background-size: cover;">
-
-        	    			</div>
-
-        	    		</div>
-
-        	    	</div>
-
-        	    </div>
-
-        	    <div class="slide"><!--more-->
-                	
-                	<div class="content">
-                		
-                		<div class="content-main flex-normal" >
-
-        	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/slider/s1.jpg) no-repeat center; background-size: cover;">
-
-        	    			</div>
-
-        	    		</div>
-
-        	    	</div>
-
-        	    </div>
+        	            ?>
 
         	            <div class="slide"><!--more-->
-        	            	
-        	            	<div class="content">
-        	            		
-        	            		<div class="content-main flex-normal" >
-
-        	    	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/slider/s3.jpg) no-repeat center; background-size: cover;">
-
-        	    	    			</div>
-
-        	    	    		</div>
-
-        	    	    	</div>
-
-        	    	    </div>
-
-
-
-			    <?php /*
-
-			    // Check rows exists.
-			    if( have_rows('slider_principal', 'option') ):
-
-			        // Loop through rows.
-			        while( have_rows('slider_principal', 'option') ) : the_row();
-
-			            // Load sub field value.
-			            $type = get_sub_field('type_link');
-			            // Do something...
-
-			            ?>
-
-
-		                <div class="slide"><!--more-->
-		                	
+                	
 		                	<div class="content">
 		                		
-		                		<div class="content-main flex-normal" >
+		                		<div class="content-main wc flex-normal" >
 
-	            	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php the_sub_field('img') ?>) no-repeat center; background-size: cover;">
+		        	    			<div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo the_sub_field('imagen') ?>) no-repeat center; background-size: cover;">
+		        	    			</div>
 
-	            	    				<?php switch ( $type ) {
+		        	    			
 
-	            	    					case '0':
-	            	    						// code...
+			        	    			<div class="info-slide">
 
-	            	    						//echo "nothing";
+			        	    				<?php if( "si" === get_sub_field('texto_conditional') ){ ?>
 
-	            	    						break;
+			        	    					<h1>Descubre tu esencia</h1>	
 
-	            	    					case '1':
-	            	    						// code...
+			        	    				<?php } ?>
 
-	            	    						$link = get_sub_field('link');
+			        	    				
 
-	            	    						break;	
+			        	    				<?php switch ( $type ) {
 
-	            	    					case '2':
-	            	    						// code...
+		            	    					case '0':
+		            	    						// code...
 
-	            	    						$get_link = get_sub_field('link_cat');
+		            	    						//echo "nothing";
 
-	            	    						$link = get_term_link( $get_link, 'product_cat' );
+		            	    						break;
 
-	            	    						break;
+		            	    					case '1':
+		            	    						// code...
 
-	            	    					case '3':
-	            	    						// code...
+		            	    						$link = get_sub_field('link');
 
-	            	    						$link = get_sub_field('link_external');
+		            	    						break;	
 
-	            	    						break;				
+		            	    					case '2':
+		            	    						// code...
+
+		            	    						$get_link = get_sub_field('link_cat');
+
+		            	    						$link = get_term_link( $get_link, 'product_cat' );
+
+		            	    						break;
+
+		            	    					case '3':
+		            	    						// code...
+
+		            	    						$link = get_sub_field('link_external');
+
+		            	    						break;				
 	            	    					
-	            	    				} ?>
+	            	    					} ?>
 
-	            	    				<?php if( $type !== "0" ){ ?>
+	            	    					<?php if( $type !== "0" ){ ?>	
 
-		            	    				<a href="<?php echo $link; ?>">
-		            	    					
+					        	    			<div class="btn-info flex-normal">
+					        	    				
+					        	    				<a href="<?php echo $link; ?>">
 
+					        	    					<div class="m-btn m-btn--main">Comprar</div>
 
-		            	    				</a>
+					        	    				</a>
 
-	            	    				<?php } ?>
+					        	    				<div class="img"></div>
 
-	            	    			</div>
+					        	    			</div>
 
-		                		</div>
+					        	    		<?php } ?>	
 
-		                	</div>
+			        	    			</div>
 
-		                </div>
+		        	    			
 
+		        	    		</div>
 
-			            <?php
+		        	    	</div>
 
-			        // End loop.
-			        endwhile;
+		        	    </div>
 
-			    // No value.
-			    else :
-			        // Do something...
-			    endif; */
-
-			    ?>
+        	        <?php endwhile; ?>
+        	      
+        	    <?php endif; ?>
 
 			</div>
 				 
