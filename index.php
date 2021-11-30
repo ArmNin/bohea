@@ -154,17 +154,27 @@ Displays single posts
 
 	</section>
 
-	<div class="what-are">
+	<?php 
 
-		<div class="info">
-		
-			<h3 class="title">¿Qué son los aceites esenciales?</h3>
+		$desc = get_field('des_ace_inicio', 'options');
 
-			<p>Los aceites esenciales son extractos de plantas que se cosechan con amor mediante la destilación. La aromaterapia es la experiencia aromática que brindan los aromas. Llénate de bienestar con nuestros productos que limpian el hogar nota en el cuerpo cuidan tu piel y reconfortan el alma</p>
+		if( $desc ) {
+
+	?>
+
+		<div class="what-are">
+
+			<div class="info">
+			
+				<h3 class="title"><?php echo $desc['titulo'] ?></h3>
+
+				<p><?php echo $desc['descripcion'] ?></p>
+
+			</div>
 
 		</div>
 
-	</div>
+	<?php } ?>
 
 	<div class="video-main">
 
@@ -176,7 +186,11 @@ Displays single posts
 
 		</div>
 		
-		<video class="vid" src="<?php echo get_stylesheet_directory_uri() ?>/assets/video/vid-index.mp4" autoplay muted loop></video>
+		<a href="<?php echo get_site_url() ?>/conocenos">
+
+		<video class="vid" src="<?php echo get_field('video_inicio', 'options') ?>" autoplay muted loop></video>
+
+		</a>
 
 	</div>
 

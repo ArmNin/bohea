@@ -866,6 +866,18 @@ if( function_exists('acf_add_options_page') ) {
     'parent_slug' => 'theme-general-settings',
   ));
 
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Pie de página',
+    'menu_title'  => 'Pie de página',
+    'parent_slug' => 'theme-general-settings',
+  ));
+
+  acf_add_options_sub_page(array(
+    'page_title'  => 'Información de contacto',
+    'menu_title'  => 'Info de contacto',
+    'parent_slug' => 'theme-general-settings',
+  ));
+
 }
 
 add_filter( 'woocommerce_add_to_cart_fragments', function($fragments) {

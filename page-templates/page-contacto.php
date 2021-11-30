@@ -8,7 +8,7 @@
 <?php get_header() ?>
 
 
-<header class="contacto">
+<header class="contacto" style="background: transparent url('<?php echo get_field('imagen_principal') ?>') no-repeat center; background-size: cover;">
     
     
 
@@ -21,13 +21,21 @@
 
     <p>@boheaoils</p>
 
-    <p>www.bohea.com.mx</p>
+    <?php  
 
-    <p>boheacompany@gmail.com</p>
+        $whatsapp = get_field('telefono_de_contacto','options');
+
+        $ddd = substr($whatsapp, 3);
+
+    ?>
+
+    <p><?php echo wordwrap($ddd , 2 , ' ' , true ); ?></p>
+
+    <p><?php the_field('email_de_contacto','options'); ?></p>
 
     <div class="links flex-normal">
         
-        <a href="https://www.instagram.com/boheaoils/">
+        <a href="<?php the_field('link_insta','options'); ?>">
             
             <div class="contact-img">
                 
@@ -71,7 +79,7 @@
 
         </a>
 
-        <a href="https://www.facebook.com/boheaoilsmx">
+        <a href="<?php the_field('link_face','options'); ?>">
             
             <div class="contact-img">
                 
@@ -98,7 +106,7 @@
             // insert the text and message
             // '5212223410458'   
             //$phone1 = get_field('w1', 'option');
-            $phone1 = '+5212223585909';
+            $phone1 = get_field('telefono_de_contacto','options');
             //$phone2 = get_field('w2', 'option');
             //$message = get_field('t1', 'option');
             $message = "";
@@ -207,53 +215,32 @@
 
             <div class="slides">
 
-                <div class="slide"><!--more-->
+                 <?php if( have_rows('donde') ): ?>
                     
-                    <div class="content">
-                        
-                        <div class="content-main wc flex-normal" >
+                     <?php while( have_rows('donde') ): the_row(); 
 
-                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/san.png) no-repeat center; background-size: 50%;">
+                        ?>
+
+
+                        <div class="slide"><!--more-->
+                            
+                            <div class="content">
+                                
+                                <div class="content-main wc flex-normal" >
+
+                                    <div class="img flex-normal" id="bg1" style="background: transparent url(<?php the_sub_field('imagen') ?>) no-repeat center; background-size: 50%;">
+
+                                    </div>
+
+                                </div>
 
                             </div>
 
                         </div>
 
-                    </div>
-
-                </div>
-
-                <div class="slide"><!--more-->
-                    
-                    <div class="content">
-                        
-                        <div class="content-main flex-normal" >
-
-                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/logol.png) no-repeat center; background-size: 80%;">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="slide"><!--more-->
-                    
-                    <div class="content">
-                        
-                        <div class="content-main flex-normal" >
-
-                            <div class="img flex-normal" id="bg1" style="background: transparent url(<?php echo get_stylesheet_directory_uri(); ?>/assets/images/logos/sears.png) no-repeat center; background-size: 80%;">
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                </div>
+                    <?php endwhile; ?>
+                  
+                <?php endif; ?>
 
             </div>
                  
@@ -262,5 +249,7 @@
     </div>
 
 </div>
+
+<div class="last-contact" style="background: transparent url('<?php echo get_field('imagen_final') ?>') no-repeat top left; background-size: cover;" ></div>
 
 <?php get_footer() ?>

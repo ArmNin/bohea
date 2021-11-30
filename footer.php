@@ -3,7 +3,7 @@
 
 			if(is_page_template('page-templates/page-contacto.php')){ ?>
 
-				<div class="last-contact"></div>
+				
 
 			<?php }else{
 
@@ -15,8 +15,8 @@
 							
 							<div class="item left">
 								
-								<h6 class="title">Únete a nuestra comunidad</h6>
-								<p>Lorem, ipsum, dolor sit amet consectetur adipisicing elit. Rerum delectus exercitationem, id. Quia nesciunt provident saepe! Dicta, laborum, excepturi!</p>
+								<h6 class="title"><?php echo get_field('titulo_pie','options') ?></h6>
+								<p><?php echo get_field('mensaje_pie','options') ?></p>
 
 							</div>
 
@@ -197,7 +197,15 @@
 
 									</div>
 
-									<div class="txt">+52 222 333 666</div>	
+									<?php  
+
+										$whatsapp = get_field('telefono_de_contacto','options');
+
+										$ddd = substr($whatsapp, 3);
+
+									?>
+
+									<div class="txt"><?php echo wordwrap($ddd , 2 , ' ' , true ); ?></div>	
 
 								</div>
 
@@ -227,7 +235,7 @@
 
 									</div>
 
-									<div class="txt">contacto@bohea.com</div>	
+									<div class="txt"><?php the_field('email_de_contacto','options'); ?></div>	
 
 								</div>
 
@@ -246,7 +254,7 @@
 
 									</div>
 
-									<div class="txt">Dirección 123</div>	
+									<div class="txt"><?php the_field('direccion','options'); ?></div>	
 
 								</div>
 
@@ -279,7 +287,7 @@
 
 									
 
-										<div class="txt"><a href="https://www.facebook.com/boheaoilsmx">Facebook</a></div>	
+										<div class="txt"><a href="<?php the_field('link_face','options'); ?>">Facebook</a></div>	
 
 									
 
@@ -325,7 +333,7 @@
 										
 									</div>
 
-									<div class="txt"><a href="https://www.instagram.com/boheaoils/">Instagram</a></div>	
+									<div class="txt"><a href="<?php the_field('link_insta','options'); ?>">Instagram</a></div>	
 
 								</div>
 
