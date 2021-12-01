@@ -10,50 +10,67 @@
 
 <header>
     
-    <video class="vidd2" src="<?php echo get_stylesheet_directory_uri() ?>/assets/video/nos.mp4" autoplay muted loop></video>
+    <video class="vidd2" src="<?php echo get_field('video_principal') ?>" autoplay muted loop></video>
 
 </header>
 
 
-<div class="enque">
-    
-    <h2 class="title">¿En qué creemos?</h2>
+ <?php $first_section = get_field('en_que_creemos'); ?>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, voluptatibus provident? Natus maiores, nulla quaerat aperiam illum. Fuga eius quibusdam ea, magni, optio distinctio. Quis, repudiandae. Libero, natus repellendus nam.</p>
+ <?php if($first_section){ ?>
 
-</div>
-
-
-<div class="his">
-    
-    <div class="columns columns--double flex-normal">
+    <div class="enque">
         
-        <div class="item">
+        <h2 class="title"><?php echo $first_section['titulo']; ?></h2>
+
+        <p><?php echo $first_section['texto']; ?></p>
+
+    </div>
+
+<?php } ?>
+
+
+ <?php $second_section = get_field('historia'); ?>
+
+ <?php if($second_section){ ?>
+
+    <div class="his">
+        
+        <div class="columns columns--double flex-normal">
             
-            <h2 class="title">Historia</h2>
+            <div class="item">
+                
+                <h2 class="title"><?php echo $second_section['titulo']; ?></h2>
 
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, voluptatibus provident? Natus maiores, nulla quaerat aperiam illum. Fuga eius quibusdam ea, magni, optio distinctio. Quis, repudiandae. Libero, natus repellendus nam.</p>
+                <p><?php echo $second_section['texto']; ?></p>
 
-        </div>
+            </div>
 
-        <div class="item">
-            
-            <div class="img"></div>
+            <div class="item">
+                
+                <div class="img"></div>
+
+            </div>
 
         </div>
 
     </div>
 
-</div>
+<?php } ?>
 
+ <?php $third_section = get_field('inspira'); ?>
+
+ <?php if($third_section){ ?>
 
 <div class="enque insp">
     
-    <h2 class="title">Nuestra inspiración</h2>
+    <h2 class="title"><?php echo $third_section['titulo']; ?></h2>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae, voluptatibus provident? Natus maiores, nulla quaerat aperiam illum. Fuga eius quibusdam ea, magni, optio distinctio. Quis, repudiandae. Libero, natus repellendus nam.</p>
+    <p><?php echo $third_section['texto']; ?></p>
 
 </div>
+
+<?php } ?>
 
 
 <div class="porque">
@@ -62,29 +79,22 @@
 
     <div class="columns columns--triple flex-normal">
         
-        <div class="item">
-            
-            <div class="img"></div>
+     <?php if( have_rows('por_que') ): ?>
+        
+         <?php while( have_rows('por_que') ): the_row(); 
 
-            <h3>Beneficio 1</h3>
+            ?>
+                <div class="item">
+                    
+                    <div class="img" style="background: transparent url(<?php the_sub_field('imagen'); ?>) no-repeat center; background-size: cover;"></div>
 
-        </div>
+                    <h3><?php the_sub_field('titulo'); ?></h3>
 
-         <div class="item">
-            
-            <div class="img"></div>
+                </div>
 
-            <h3>Beneficio 2</h3>
-
-        </div>
-
-         <div class="item">
-            
-            <div class="img"></div>
-
-            <h3>Beneficio 3</h3>
-
-        </div>
+        <?php endwhile; ?>
+          
+    <?php endif; ?>
 
     </div>
 
