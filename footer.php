@@ -16,7 +16,7 @@
 							<div class="item left">
 								
 								<h6 class="title"><?php echo get_field('titulo_pie','options') ?></h6>
-								<p><?php echo get_field('mensaje_pie','options') ?></p>
+								<p><?php the_field('mensaje_pie','options') ?></p>
 
 							</div>
 

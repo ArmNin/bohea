@@ -8,9 +8,9 @@
 <?php get_header() ?>
 
 
-<header>
+<header class="nos" style="background: transparent url(<?php the_field('imagen_principal'); ?>) no-repeat center; background-size: cover;">
     
-    <video class="vidd2" src="<?php echo get_field('video_principal') ?>" autoplay muted loop></video>
+    
 
 </header>
 

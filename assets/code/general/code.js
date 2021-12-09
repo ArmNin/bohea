@@ -5,6 +5,35 @@ jQuery(function ($) {
 		
 	});
 
+	//var srcImg = $(".wc-pao-addons-container .wc-pao-addon-wrap a img").attr('src');
+
+	
+
+	setTimeout(function(){
+
+		$(".wc-pao-addons-container .wc-pao-addon-wrap a").each( function(i){
+
+			if(i>0){	
+
+				var srcImg = $(this).find("img").attr('src');
+
+				var format = srcImg.substr(srcImg.length - 4); 
+
+				var last = srcImg.slice(0, -12);
+
+				var lastSrc = last+format;
+
+				$(this).find("img").attr("src", lastSrc);
+
+				//console.log(lastSrc);
+
+			}
+
+		});
+
+	}, 150);
+
+
 	var $clonedPagination = $(".woocommerce-product-search-filter-products-prefix").clone();
 
 	$(".store-info-container .right .woocommerce.columns-3").append($clonedPagination);

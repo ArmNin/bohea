@@ -29,7 +29,7 @@
                 
                 <div class="slider">
 
-                    <h1 class="special"><span class="title">SHOP</span></h1>
+                    <h1 class="special"><span class="title"><?php the_field('titulo_tienda', 'options') ?></span></h1>
 
                 </div>
 
@@ -51,9 +51,11 @@
 
                 <div class="btn-info flex-normal">
                     
-                    <div class="m-btn m-btn--main">Armar Kit</div>
+                    <a href="<?php the_field('link_tienda','options') ?>">
+                    <div class="m-btn m-btn--main"><?php the_field('boton_tienda', 'options') ?></div>
+                    </a>
 
-                    <div class="img special"></div>
+                    <div class="img special" style="background: transparent url(<?php the_field('imagen_principal_tienda', 'options') ?>) no-repeat center; background-size: contain;"></div>
 
                 </div>
 

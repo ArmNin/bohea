@@ -37,7 +37,7 @@ Displays single posts
 
 			        	    				<?php if( "si" === get_sub_field('texto_conditional') ){ ?>
 
-			        	    					<h1>Descubre tu esencia</h1>	
+			        	    					<h1><?php the_sub_field('texto') ?></h1>	
 
 			        	    				<?php } ?>
 

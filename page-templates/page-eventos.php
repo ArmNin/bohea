@@ -30,9 +30,9 @@
             
             <div class="slider">
 
-                <h1 class="special">Eventos</h1>
+                <h1 class="special"><?php the_field('titulo') ?></h1>
 
-                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident nobis quisquam quia, aut distinctio excepturi. </p>
+                 <p><?php the_field('intro') ?></p>
 
                  <!-- <div class="m-btn m-btn--main">Crear ahora</div>-->
 
@@ -62,7 +62,8 @@
                 
                 
 
-                <div class="img special"></div>
+                <div class="img special" style="background: transparent url(<?php the_field('img_pri') ?>) no-repeat center left;
+    background-size: cover;"></div>
 
             </div>
 
@@ -99,18 +100,20 @@
         
         <div class="columns columns--triple flex-normal">
             
-            <div class="item left">
+            
 
-                <?php if( have_rows('instalaciones_gal', 'options') ): ?>
+                <?php if( have_rows('gal') ): ?>
                    
-                    <?php while( have_rows('instalaciones_gal', 'options') ): the_row(); 
+                    <?php while( have_rows('gal') ): the_row(); 
                         
                         
                        ?>
 
+                       <div class="item left">
+
                        <a href="<?php the_sub_field('img') ?>" data-lightbox="gal1" >
 
-                           <div class="img" style="background: transparent url(<?php the_sub_field('img') ?>) no-repeat center; background-size: cover;">
+                           <div class="img" style="background: transparent url(<?php the_sub_field('img') ?>) no-repeat center; background-size: contain;">
                             
                             <div class="overlay"></div>
 
@@ -120,65 +123,12 @@
 
                        </a>
 
-                   <?php endwhile; ?>
-                 
-               <?php endif; ?>
-
-            </div>
-
-            <div class="item left">
-
-                <?php if( have_rows('instalaciones_cap', 'options') ): ?>
-                   
-                    <?php while( have_rows('instalaciones_cap', 'options') ): the_row(); 
-                        
-                        
-                       ?>
-
-                       <a href="<?php the_sub_field('img') ?>" data-lightbox="gal1" >
-
-                           <div class="img" style="background: transparent url(<?php the_sub_field('img') ?>) no-repeat center; background-size: cover;">
-                            
-                            <div class="overlay"></div>
-
-                           </div>
-
-                           <p>Capacitaciones</p>
-
-                       </a>
+                       </div>
 
                    <?php endwhile; ?>
                  
                <?php endif; ?>
 
-            </div>
-
-            <div class="item left">
-
-                <?php if( have_rows('instalaciones_pat', 'options') ): ?>
-                   
-                    <?php while( have_rows('instalaciones_pat', 'options') ): the_row(); 
-                        
-                        
-                       ?>
-
-                       <a href="<?php the_sub_field('img') ?>" data-lightbox="gal1" >
-
-                           <div class="img" style="background: transparent url(<?php the_sub_field('img') ?>) no-repeat center; background-size: cover;">
-                            
-                            <div class="overlay"></div>
-
-                           </div>
-
-                           <p>Patrullas</p>
-
-                       </a>
-
-                   <?php endwhile; ?>
-                 
-               <?php endif; ?>
-
-            </div>
 
         </div>
 

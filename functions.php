@@ -994,5 +994,14 @@ function extra_product_info(){
 
 }
 
+/* Change Text Site Wide */
+
+function wpfi_change_text( $translated_text ) {
+    if ( $translated_text == 'each' ) {
+        $translated_text = 'cada uno';
+    }
+    return $translated_text;
+}
+add_filter( 'gettext', 'wpfi_change_text', 20 );
 
 ?>

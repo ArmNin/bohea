@@ -285,7 +285,7 @@ body{
 		padding: 10px 0;
 		margin-bottom: 0;
 	}
-	span{
+	span, strong{
 		font-weight: bold;
 	}
 	.icon{
@@ -504,7 +504,12 @@ header{
 			display: none;
 		}
 	}
-
+	&.nos{
+		height: 220px;
+		@include tablet{
+			height: 50vh;
+		}
+	}
 	&.store{
 		padding: 20px 0 20px 0;
 		@include tablet{
@@ -565,7 +570,7 @@ header{
 				color: white;
 				font-size: 0.85em;
 				margin-right: 20px;
-				text-shadow: 1px 1px 1px black;
+				//text-shadow: 1px 1px 1px black;
 				@include tablet{
 					text-align: left;
 					color: black;
@@ -746,6 +751,7 @@ header{
 
 			p{
 				text-align: center!important;
+				margin-bottom: 0;
 				@include tablet{
 					text-align: left!important;
 				}
@@ -784,6 +790,20 @@ header{
 						background-size: cover;
 						display: block;
 						margin-bottom: 20px;
+					}
+				}
+			}
+			&.wv{
+				width: 90%;
+				overflow: hidden;
+				border-radius: 6px;
+				@include tablet{
+					width: 50%;
+				}
+				video{
+					width: 100%;
+					@include tablet{
+
 					}
 				}
 			}
@@ -4806,17 +4826,36 @@ div.wpforms-container-full .wpforms-form button[type=submit]{
 
 	position: absolute;
 	background-color: red;
-	width: 200px;
-	padding: 5px;
+	width: 250px;
+	padding: 10px;
 	color: white;
 	opacity: 0;
 	transition: all 0.3s ease;
+	left: 0;
+	bottom: 0;
+	transform: translate(0, 100%);
+	font-size: 0.9em;
+	line-height: 1.3em;
+	border: solid 3px black;
+	border-radius: 6px;
+	z-index: 1000;
+	@include tablet{
+		left: auto;
+		right: 0;
+		bottom: 0;
+		font-size: 1.3em;
+	}
 	span{
 		display: block;
-		font-size: 0.8rem;
+		font-size: 0.9rem;
 		margin-top: 10px;
+		@include tablet{
+			font-size: 1rem;
+		}
 	}
 }
+
+
 
 #conektaIframeContainer{
 
@@ -5051,6 +5090,72 @@ a{
 					}
 				}
 			}
+			.bundled_item_col{
+				.quantity{
+					.max-qty-message{
+						pointer-events: none;
+					}
+				}
+			}
+			.bundled_item_wrap{
+				.bundled_item_cart_content{
+					.price{
+						margin-top: 10px!important;
+						position: relative;
+						padding-left: 20px;
+						font-size: 1rem!important;
+						display: inline-block;
+						&:after{
+							position: absolute;
+							left: 0px;
+							top: 50%;
+							transform: translate(0, -50%);
+							content: "";
+							width: 0;
+							height: 0;
+							border-style: solid;
+							border-width: 7.5px 0 7.5px 13.0px;
+							border-color: transparent transparent transparent red;
+						}
+						.amount{
+							//font-style: 1.8rem!important;
+							font-weight: bold;
+							bdi{
+								font-size: 1.4rem!important;
+							}
+						}
+					}
+					.stock{
+						display: none;
+					}
+				}
+			}
+		}
+	}
+	.bundle_data{
+		.bundle_wrap{
+			.bundle_price{
+				display: inline-block;
+				border-top: solid 3px #ccc;
+				padding-top: 20px;
+				.amount{
+					&:before{
+						display: inline-block;
+						content:"Total del kit: ";
+						margin-right: 10px;
+						color: #666;
+					}
+				}
+			}
+		}
+	}
+	>.wrapp-product{
+		.summary{
+			.price{
+				display: none;
+				
+
+			}
 		}
 	}
 }
@@ -5064,6 +5169,36 @@ div.wpforms-container-full .wpforms-form ul.wpforms-image-choices-modern label:n
 		&:last-of-type{
 			form, p{
 				display: none;
+			}
+		}
+	}
+}
+
+
+.wc-pao-addons-container{
+	p{
+		&.wc-pao-addon-wrap{
+			a{
+				&:first-of-type{
+					display: block;
+					margin-bottom: 20px;
+					display: flex;
+					justify-content: flex-start;
+					align-content: center;
+					align-items: center;
+					&:after{
+						display: inline-block;
+						content: "Sin dedicatoria";
+						color: black;
+						font-weight: bold;
+					}
+					img{
+						
+						width: 50px;
+						height: 50px;
+					}
+				}
+
 			}
 		}
 	}
