@@ -686,6 +686,98 @@ function woo_rename_tabs( $tabs ) {
     return $tabs;
 
 }
+/**
+ * Format a date.
+ * @param string $date  Date with format '2021-10-26 10:30:00'
+ * @return string       Date with format 'Octubre 26, 2021'    
+ */
+
+function my_format_date($date) {
+    $date_split = explode(' ', $date);
+    $date_split = explode('-', $date_split[0]);
+    $date_result = '';
+    switch($date_split[1]) {
+        case '01':
+            $date_result .= 'Enero';
+            break;
+        case '02':
+            $date_result .= 'Febrero';
+            break;
+        case '03':
+            $date_result .= 'Marzo';
+            break;
+        case '04':
+            $date_result .= 'Abril';
+            break;
+        case '05':
+            $date_result .= 'Mayo';
+            break;
+        case '06':
+            $date_result .= 'Junio';
+            break;
+        case '07':
+            $date_result .= 'Julio';
+            break;
+        case '08':
+            $date_result .= 'Agosto';
+            break;
+        case '09':
+            $date_result .= 'Septiembre';
+            break;
+        case '10':
+            $date_result .= 'Octubre';
+            break;
+        case '11':
+            $date_result .= 'Noviembre';
+            break;
+        case '12':
+            $date_result .= 'Diciembre';
+            break;
+    }
+    $date_result .= ' '.$date_split[2].', '.$date_split[0];
+    return $date_result;
+}
+
+/**
+ * Check if a comment has children.
+ * @param  int $comment_id Comment ID
+ * @return bool            Has comment replys.
+ */
+function has_comment_replys($comment_id) {
+    return get_comments( [ 'parent' => $comment_id, 'count' => true ] ) > 0;
+}
+
+/**
+ * Insert a comment on db. Data recived by ajax.
+ */
+function send_comment_by_ajax() {
+    $post_id = $_POST['post_id']; 
+    $parent = $_POST['parent'];
+    $author = $_POST['author'];
+    $email = $_POST['email'];
+    $content = $_POST['content'];
+
+    $data = array(
+        'comment_post_ID' => $post_id,
+        'comment_parent' => $parent,
+        'comment_author' => $author,
+        'comment_author_email' => $email,
+        'comment_content' => $content,
+        'comment_approved' => 1,
+    );
+
+    $comment_id = wp_insert_comment($data);
+    
+    $response = array(
+        'comment_id' => $comment_id,
+        'data' => $data,
+    );
+
+    wp_send_json($response);
+}
+
+add_action('wp_ajax_nopriv_send_comment_by_ajax', 'send_comment_by_ajax');
+add_action('wp_ajax_send_comment_by_ajax', 'send_comment_by_ajax');
 
 /*
 add custom field to products when they are on kit page.

@@ -650,11 +650,16 @@ var ml_account = ml('accounts', '3732467', 'w9z3x6x1r6', 'load');
 				</div>	
 
 				<div class="right flex-normal">	
+<<<<<<< HEAD
 					
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/eventos">Eventos</a></div>
 
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/conocenos">Conócenos</a></div>	
 					
+=======
+					<div class="menu-item"><a href="<?php echo get_site_url() ?>/conocenos">Conocenos</a></div>	
+					<div class="menu-item"><a href="<?php echo get_site_url() ?>/blog">Blog</a></div>
+>>>>>>> 1b4feb521588c6306561b3ba0edf861086bd515f
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/contacto">Contacto</a></div>
 
 					<div class="menu-item cart">
