@@ -990,9 +990,17 @@ function extra_product_info(){
 
         </div>';
 
+
+
+
+
     }    
 
 }
+
+
+
+
 
 /* Change Text Site Wide */
 
@@ -1003,5 +1011,74 @@ function wpfi_change_text( $translated_text ) {
     return $translated_text;
 }
 add_filter( 'gettext', 'wpfi_change_text', 20 );
+
+
+add_action( 'woocommerce_before_calculate_totals', 'add_discount_for_3_diff_cats', 10, 1 );
+function add_discount_for_3_diff_cats( $wc_cart ) {
+
+    if ( is_admin() && ! defined( 'DOING_AJAX' ) )
+        return;
+
+    // HERE set your coupon code and your parent product categories in the array
+    $coupon_code_to_apply = 'summer';
+    // HERE define your product categories IDs in the array
+    $your_categories = array( 11, 13, 14 ); // IDs
+
+    // If coupon is already set
+    if( $wc_cart->has_discount( $coupon_code_to_apply ) )
+        $has_coupon = true;
+
+    //echo 'pinguino';
+
+    
+
+    foreach( $wc_cart->get_cart() as $cart_item ) {
+        
+        $product_id = $cart_item['product_id'];
+        $product = wc_get_product($product_id);
+        
+
+        
+        if("bundle" === $product->get_type()){
+
+            //echo $product_id;
+
+            echo "<pre>";
+            //var_dump($cart_item['data']);
+            echo "</pre>";
+
+
+            //get_bundled_items( $context = 'view' );
+
+        }
+
+    }
+
+    /*
+
+    $count_cats = count($categories);
+    $has_discount = $wc_cart->has_discount( $coupon_code_to_apply );
+
+    if ( 3 <= $count_cats && ! $has_discount ) {
+        $wc_cart->add_discount($coupon_code_to_apply);
+    } elseif ( 3 > $count_cats && $has_discount ) {
+        $wc_cart->remove_coupon($coupon_code_to_apply);
+    }
+
+    */
+}
+
+//Many reciepents to the procesing payment
+add_filter( 'woocommerce_email_headers', 'bbloomer_order_completed_email_add_cc_bcc', 9999, 3 );
+  
+function bbloomer_order_completed_email_add_cc_bcc( $headers, $email_id, $order ) {
+    if ( 'customer_processing_order' == $email_id ) {
+        
+        $headers .= "Bcc: Me <grupoga.ventas1@gmail.com>" . "\r\n"; // del if not needed
+        $headers .= "Bcc: Me <grupoga.compras@gmail.com>" . "\r\n"; // del if not needed
+    }
+    return $headers;
+}
+
 
 ?>

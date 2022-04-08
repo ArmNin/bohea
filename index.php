@@ -64,7 +64,9 @@ Displays single posts
 
 		            	    						$get_link = get_sub_field('link_cat');
 
-		            	    						$link = get_term_link( $get_link, 'product_cat' );
+		            	    						//$link = get_term_link( $get_link, 'product_cat' );
+
+		            	    						$link = get_site_url().'/shop/?ixwpst[product_cat][]='.$get_link;
 
 		            	    						break;
 

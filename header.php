@@ -13,6 +13,50 @@
 
 <?php wp_head(); ?>
 
+<!-- MailerLite Universal -->
+<script>
+(function(m,a,i,l,e,r){ m['MailerLiteObject']=e;function f(){
+var c={ a:arguments,q:[]};var r=this.push(c);return "number"!=typeof r?r:f.bind(c.q);}
+f.q=f.q||[];m[e]=m[e]||f.bind(f.q);m[e].q=m[e].q||f.q;r=a.createElement(i);
+var _=a.getElementsByTagName(i)[0];r.async=1;r.src=l+'?v'+(~~(new Date().getTime()/1000000));
+_.parentNode.insertBefore(r,_);})(window, document, 'script', 'https://static.mailerlite.com/js/universal.js', 'ml');
+
+var ml_account = ml('accounts', '3732467', 'w9z3x6x1r6', 'load');
+</script>
+<!-- End MailerLite Universal -->
+
+<!-- Global site tag (gtag.js) - Google Ads: 10841715907 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=AW-10841715907"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'AW-10841715907');
+</script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-34XX6MM1BJ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-34XX6MM1BJ');
+</script>
+
+<!-- Hotjar Tracking Code for https://www.bohea.com.mx/ -->
+<script>
+    (function(h,o,t,j,a,r){
+        h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+        h._hjSettings={hjid:2823602,hjsv:6};
+        a=o.getElementsByTagName('head')[0];
+        r=o.createElement('script');r.async=1;
+        r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+        a.appendChild(r);
+    })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+</script>
+
 </head>
 
 <body <?php body_class(); ?>>
@@ -451,17 +495,17 @@
 
 					<div class="menu-item">
 
-						<a href="<?php echo get_site_url() ?>/shop">Productos</a>
+						<a href="<?php echo get_site_url() ?>/tienda">Productos</a>
 
 						<div class="more">
 							
 							<ul class="flex-normal">
 								
-								<li><a href="<?php echo get_site_url() ?>/shop/?ixwpst[product_cat][]=30&title=1&excerpt=1&content=1&categories=1&attributes=1&tags=1&sku=1&ixwpsf[taxonomy][product_cat][show]=set&ixwpsf[taxonomy][product_cat][multiple]=0&ixwpsf[taxonomy][product_cat][filter]=1">Aceites esenciales</a></li>
-								<li><a href="<?php echo get_site_url() ?>/shop/?ixwpst[product_cat][]=31&title=1&excerpt=1&content=1&categories=1&attributes=1&tags=1&sku=1&ixwpsf[taxonomy][product_cat][show]=set&ixwpsf[taxonomy][product_cat][multiple]=0&ixwpsf[taxonomy][product_cat][filter]=1">Bed Spray</a></li>
-								<li><a href="<?php echo get_site_url() ?>/shop/?ixwpst[product_cat][]=32&title=1&excerpt=1&content=1&categories=1&attributes=1&tags=1&sku=1&ixwpsf[taxonomy][product_cat][show]=set&ixwpsf[taxonomy][product_cat][multiple]=0&ixwpsf[taxonomy][product_cat][filter]=1">Spray antibacterial</a></li>
-								<li class="nm"><a href="<?php echo get_site_url() ?>/shop/?ixwpst[product_cat][]=33&title=1&excerpt=1&content=1&categories=1&attributes=1&tags=1&sku=1&ixwpsf[taxonomy][product_cat][show]=set&ixwpsf[taxonomy][product_cat][multiple]=0&ixwpsf[taxonomy][product_cat][filter]=1">Body Mist</a></li>
-								<li class="nm"><a href="<?php echo get_site_url() ?>/shop/?ixwpst[product_cat][]=34&title=1&excerpt=1&content=1&categories=1&attributes=1&tags=1&sku=1&ixwpsf[taxonomy][product_cat][show]=set&ixwpsf[taxonomy][product_cat][multiple]=0&ixwpsf[taxonomy][product_cat][filter]=1">Jabónes</a></li>
+								<li><a href="<?php echo get_site_url() ?>/tienda/?ixwpst[product_cat][]=30">Aceites esenciales</a></li>
+								<li><a href="<?php echo get_site_url() ?>/tienda/?ixwpst[product_cat][]=31">Bed Spray</a></li>
+								<li><a href="<?php echo get_site_url() ?>/tienda/?ixwpst[product_cat][]=32">Spray antibacterial</a></li>
+								<li class="nm"><a href="<?php echo get_site_url() ?>/tienda/?ixwpst[product_cat][]=33">Body Mist</a></li>
+								<li class="nm"><a href="<?php echo get_site_url() ?>/tienda/?ixwpst[product_cat][]=34">Jabónes</a></li>
 
 							</ul>
 
@@ -472,7 +516,7 @@
 					<div class="menu-item"><a href="<?php echo get_site_url() ?>/producto/kit">Regalos & Kits</a></div>
 
 
-					<div class="menu-item"><a href="<?php echo get_site_url() ?>/crea-tu-marca/">Crea tu marca</a></div>
+					<div class="menu-item"><a href="<?php echo get_site_url() ?>/maquilas">Maquilas</a></div>
 
 				</div>
 

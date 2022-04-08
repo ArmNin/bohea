@@ -50,7 +50,7 @@
             
           
 
-        <video class="vidd2" src="<?php echo get_field('video_principal') ?>" loop controls muted autoplay controlsList="nodownload"></video>
+        <video class="vidd2" src="https://test.bohea.com.mx/wp-content/uploads/2021/12/nos-1.mp4<?php //echo get_field('video_principal') ?>" loop controls muted autoplay controlsList="nodownload"></video>
 
             
 
